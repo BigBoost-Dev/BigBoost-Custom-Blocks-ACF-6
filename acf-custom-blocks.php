@@ -27,75 +27,12 @@ function bigboost_enqueue_global_assets() {
     wp_enqueue_script('bigboost-global-js', plugin_dir_url(__FILE__) . 'assets/global.js', array('jquery'), null, true);
 }
 
-// Register ACF Blocks
-add_action('acf/init', 'register_bigboost_acf_blocks');
-function register_bigboost_acf_blocks() {
-
-     // Banner Section Block
-    acf_register_block_type(array(
-        'name'              => 'banner-section',
-        'title'             => __('Banner Section'),
-        'description'       => __('A custom banner section block.'),
-        'render_template'   => plugin_dir_path(__FILE__) . 'blocks/banner-section/banner.php',
-        'category'          => 'bigboost-blocks',
-        'icon'              => 'format-image',
-        'keywords'          => array('banner', 'section', 'header'),
-    ));
-
-     // Quote Block
-    acf_register_block_type(array(
-        'name'              => 'quote-section',
-        'title'             => __('Quote'),
-        'description'       => __('A custom Quote block.'),
-        'render_template'   => plugin_dir_path(__FILE__) . 'blocks/quote-section/quote.php',
-        'category'          => 'bigboost-blocks',
-        'icon'              => 'admin-comments',
-        'keywords'          => array('quote', 'quote'),
-    ));
-
-    // Call to Action Block
-    acf_register_block_type(array(
-        'name'              => 'call-to-action',
-        'title'             => __('Call to Action'),
-        'description'       => __('A custom CTA block.'),
-        'render_template'   => plugin_dir_path(__FILE__) . 'blocks/call-to-action/cta.php',
-        'category'          => 'bigboost-blocks',
-        'icon'              => 'megaphone',
-        'keywords'          => array('cta', 'button'),
-    ));
-
-    // Gallery Block
-    acf_register_block_type(array(
-        'name'              => 'gallery',
-        'title'             => __('Image Gallery'),
-        'description'       => __('A custom image gallery block.'),
-        'render_template'   => plugin_dir_path(__FILE__) . 'blocks/gallery/gallery.php',
-        'category'          => 'bigboost-blocks',
-        'icon'              => 'format-gallery',
-        'keywords'          => array('gallery', 'images'),
-    ));
-
-    // Faq Block
-    acf_register_block_type(array(
-        'name'              => 'faq',
-        'title'             => __('Faq Block'),
-        'description'       => __('A custom Question and Answer block.'),
-        'render_template'   => plugin_dir_path(__FILE__) . 'blocks/faq/faq.php',
-        'category'          => 'bigboost-blocks',
-        'icon'              => 'products',
-        'keywords'          => array('gallery', 'images'),
-    ));
-
-     // Circle Slider Block
-    acf_register_block_type(array(
-        'name'              => 'circle-slider',
-        'title'             => __('Circle Slider Block'),
-        'description'       => __('A custom Question and Answer block.'),
-        'render_template'   => plugin_dir_path(__FILE__) . 'blocks/circle-slider/circle-slider.php',
-        'category'          => 'bigboost-blocks',
-        'icon'              => 'products',
-        'keywords'          => array('gallery', 'images'),
-    ));
+// Register blocks from block.json files
+add_action('init', 'bigboost_register_blocks');
+function bigboost_register_blocks() {
+    foreach (glob(plugin_dir_path(__FILE__) . 'blocks/*/block.json') as $block) {
+        register_block_type($block);
+    }
 }
 
 // Add custom block category

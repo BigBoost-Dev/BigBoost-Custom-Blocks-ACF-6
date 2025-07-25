@@ -1,0 +1,11 @@
+{
+  "name": "acf/call-to-action",
+  "title": "Call to Action",
+  "description": "A custom CTA block.",
+  "category": "bigboost-blocks",
+  "icon": "megaphone",
+  "keywords": ["cta", "button"],
+  "acf": {
+    "renderTemplate": "cta.php"
+  }
+}

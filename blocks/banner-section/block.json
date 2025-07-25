@@ -1,0 +1,11 @@
+{
+  "name": "acf/banner-section",
+  "title": "Banner Section",
+  "description": "A custom banner section block.",
+  "category": "bigboost-blocks",
+  "icon": "format-image",
+  "keywords": ["banner", "section", "header"],
+  "acf": {
+    "renderTemplate": "banner.php"
+  }
+}
