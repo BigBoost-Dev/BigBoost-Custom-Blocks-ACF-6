@@ -1,0 +1,11 @@
+{
+  "name": "acf/gallery",
+  "title": "Image Gallery",
+  "description": "A custom image gallery block.",
+  "category": "bigboost-blocks",
+  "icon": "format-gallery",
+  "keywords": ["gallery", "images"],
+  "acf": {
+    "renderTemplate": "gallery.php"
+  }
+}

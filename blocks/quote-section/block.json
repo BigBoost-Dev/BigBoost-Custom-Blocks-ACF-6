@@ -1,0 +1,11 @@
+{
+  "name": "acf/quote-section",
+  "title": "Quote",
+  "description": "A custom Quote block.",
+  "category": "bigboost-blocks",
+  "icon": "admin-comments",
+  "keywords": ["quote", "quote"],
+  "acf": {
+    "renderTemplate": "quote.php"
+  }
+}

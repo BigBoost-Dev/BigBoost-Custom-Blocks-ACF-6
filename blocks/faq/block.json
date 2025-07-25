@@ -1,0 +1,11 @@
+{
+  "name": "acf/faq",
+  "title": "Faq Block",
+  "description": "A custom Question and Answer block.",
+  "category": "bigboost-blocks",
+  "icon": "products",
+  "keywords": ["gallery", "images"],
+  "acf": {
+    "renderTemplate": "faq.php"
+  }
+}
