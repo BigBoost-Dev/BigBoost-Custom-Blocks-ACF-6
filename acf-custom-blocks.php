@@ -30,8 +30,51 @@ function bigboost_enqueue_global_assets() {
 // Register blocks from block.json files
 add_action('init', 'bigboost_register_blocks');
 function bigboost_register_blocks() {
-    foreach (glob(plugin_dir_path(__FILE__) . 'blocks/*/block.json') as $block) {
-        register_block_type($block);
+    foreach (glob(plugin_dir_path(__FILE__) . 'blocks/*/block.json') as $block_path) {
+        // Ensure the file is readable before trying to register it.
+        if (!is_readable($block_path)) {
+            error_log(sprintf('BigBoost Custom Blocks: Block file %s is not readable.', $block_path));
+            continue;
+        }
+
+        $json = file_get_contents($block_path);
+        if ($json === false) {
+            error_log(sprintf('BigBoost Custom Blocks: Unable to read %s.', $block_path));
+            continue;
+        }
+
+        $data = json_decode($json, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log(sprintf('BigBoost Custom Blocks: Invalid JSON in %s - %s', $block_path, json_last_error_msg()));
+            continue;
+        }
+
+        // Validate required block properties before registering.
+        $required = array('name', 'title', 'category');
+        $missing  = array();
+
+        foreach ($required as $key) {
+            if (empty($data[$key])) {
+                $missing[] = $key;
+            }
+        }
+
+        if (isset($data['acf']) && isset($data['acf']['renderTemplate'])) {
+            // Include render template path check as part of validation
+            if (!is_string($data['acf']['renderTemplate']) || $data['acf']['renderTemplate'] === '') {
+                $missing[] = 'acf.renderTemplate';
+            }
+        } else {
+            $missing[] = 'acf.renderTemplate';
+        }
+
+        if ($missing) {
+            error_log(sprintf('BigBoost Custom Blocks: Missing required data (%s) in %s', implode(', ', $missing), $block_path));
+            continue;
+        }
+
+        register_block_type($block_path);
     }
 }
 
