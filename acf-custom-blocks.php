@@ -60,7 +60,7 @@ function bigboost_register_blocks() {
             }
         }
 
-        if (!empty($data['acf']) && isset($data['acf']['renderTemplate'])) {
+        if (isset($data['acf']) && isset($data['acf']['renderTemplate'])) {
             // Include render template path check as part of validation
             if (!is_string($data['acf']['renderTemplate']) || $data['acf']['renderTemplate'] === '') {
                 $missing[] = 'acf.renderTemplate';
