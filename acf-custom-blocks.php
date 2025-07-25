@@ -38,6 +38,11 @@ function bigboost_register_blocks() {
         }
 
         $json = file_get_contents($block_path);
+        if ($json === false) {
+            error_log(sprintf('BigBoost Custom Blocks: Unable to read %s.', $block_path));
+            continue;
+        }
+
         $data = json_decode($json, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
