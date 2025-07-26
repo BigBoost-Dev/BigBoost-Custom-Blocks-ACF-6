@@ -65,6 +65,18 @@ body {
     margin: 0;
 }
 
+.container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
 ul {
     list-style: none;
     padding: 0 !important;
@@ -236,7 +248,7 @@ a {
 }
 
 .quotes-section p img {
-    vertical-align: super;
+    vertical-align: baseline;
 }
 
 .quotes-blocks img {
@@ -462,6 +474,7 @@ a {
     font-weight: 700;
     font-size: 24px;
     font-family: 'GoFundMe';
+    text-align: left;
 }
 
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-slider-description {
