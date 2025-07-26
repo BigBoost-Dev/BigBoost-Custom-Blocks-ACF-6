@@ -1,9 +1,13 @@
 <?php
-$subheading = get_field('subheading');
-$heading = get_field('heading');
-$description = get_field('description');
-$button = get_field('button');
-$button_text = get_field('button_text');
+/**
+ * Banner Section Block template.
+ * Outputs optional subheading, heading, description and button.
+ */
+$subheading   = get_field( 'subheading' );
+$heading      = get_field( 'heading' );
+$description  = get_field( 'description' );
+$button       = get_field( 'button' );
+$button_text  = get_field( 'button_text' );
 ?>
 <section class="hero-section position-relative" aria-labelledby="hero-heading">
     <div class="bb-container">

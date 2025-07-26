@@ -1,7 +1,11 @@
 <?php
-$faq_title = get_field('faq_title');
-$faq_description = get_field('faq_description');
-$faq_items = get_field('faq_items');
+/**
+ * FAQ Section Block template.
+ * Outputs collapsible FAQ items.
+ */
+$faq_title       = get_field( 'faq_title' );
+$faq_description = get_field( 'faq_description' );
+$faq_items       = get_field( 'faq_items' );
 ?>
 
         <section class="bb-faq-section">

@@ -1,5 +1,9 @@
 <?php
-$images = get_field('gallery_images');
+/**
+ * Gallery Block template.
+ * Loops through selected images.
+ */
+$images = get_field( 'gallery_images' );
 ?>
 
 <div class="custom-gallery">
@@ -11,3 +15,4 @@ $images = get_field('gallery_images');
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
+

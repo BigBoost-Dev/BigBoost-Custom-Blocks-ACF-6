@@ -1,3 +1,4 @@
+/* BigBoost custom block interactions */
 jQuery(function ($) {
 
     let height = $('.bb-slider-content').outerHeight();
@@ -37,7 +38,7 @@ jQuery(function ($) {
             setTimeout(() => {
                 if (isForward) {
                     if (targetIndex == 4) {
-                        console.log("Jimi")
+                        // reached the end; no next item
                     } else {
                         $('.pre-pre').addClass('next-next')
                         $('.next-next').removeClass('pre-pre d-none')
@@ -45,7 +46,7 @@ jQuery(function ($) {
 
                 } else {
                     if (targetIndex == 0) {
-                        console.log("Nithyaja")
+                        // reached the beginning; no previous item
                     } else {
                         $('.next-next').addClass('pre-pre')
                         $('.pre-pre').removeClass('next-next d-none')

@@ -1,7 +1,11 @@
 <?php
-  $quote        = get_field('field_quote');
-  $author       = get_field('field_author');
-  $banner_image = get_field('banner_image');
+/**
+ * Quote Section Block template.
+ * Shows a quote with author and image.
+ */
+  $quote        = get_field( 'field_quote' );
+  $author       = get_field( 'field_author' );
+  $banner_image = get_field( 'banner_image' );
 ?>
 <section class="quotes-section">
   <div class="bb-container">
@@ -25,3 +29,4 @@
     </div>
   </div>
 </section>
+

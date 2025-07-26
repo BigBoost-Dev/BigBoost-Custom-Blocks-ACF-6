@@ -1,7 +1,11 @@
 <?php
-$title = get_field('cta_title');
-$description = get_field('field_cta_description');
-$button = get_field('cta_button');
+/**
+ * Call to Action Block template.
+ * Displays title, description and a link button.
+ */
+$title       = get_field( 'cta_title' );
+$description = get_field( 'field_cta_description' );
+$button      = get_field( 'cta_button' );
 ?>
 <section class="survey">
             <div class="bb-container">

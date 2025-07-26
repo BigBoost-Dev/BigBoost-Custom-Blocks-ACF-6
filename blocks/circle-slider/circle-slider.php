@@ -1,9 +1,12 @@
 <?php
-$section_title = get_field('field_circle_slider_title');
-
-$section_desc = get_field('field_circle_slider_desc');
-$section_tag = get_field('field_circle_slider_tag');
-$section_items = get_field('field_circle_slider_items');
+/**
+ * Circle Slider Block template.
+ * Displays a step-based image slider.
+ */
+$section_title  = get_field( 'field_circle_slider_title' );
+$section_desc   = get_field( 'field_circle_slider_desc' );
+$section_tag    = get_field( 'field_circle_slider_tag' );
+$section_items  = get_field( 'field_circle_slider_items' );
 ?>
 <?php if ($section_items) : ?>
     <section class="bb-circle-slider d-none d-lg-block">
