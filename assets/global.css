@@ -65,6 +65,19 @@ body {
     margin: 0;
 }
 
+/* Custom container to avoid conflicts with framework CSS */
+.bb-container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+@media (max-width: 768px) {
+    .bb-container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
 ul {
     list-style: none;
     padding: 0 !important;
@@ -236,7 +249,7 @@ a {
 }
 
 .quotes-section p img {
-    vertical-align: super;
+    vertical-align: baseline;
 }
 
 .quotes-blocks img {
@@ -462,6 +475,7 @@ a {
     font-weight: 700;
     font-size: 24px;
     font-family: 'GoFundMe';
+    text-align: left;
 }
 
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-slider-description {
@@ -571,7 +585,8 @@ a {
     }
 
     .bb-circle-slider .bb-slider-content h2,
-    .bb-circle-slider .bb-slider-content>p {
+    .bb-circle-slider .bb-slider-content > p,
+    .bb-circle-slider .bb-slider-content .bb-slider-context>div h3 {
         text-align: center;
     }
 

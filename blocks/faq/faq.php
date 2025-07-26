@@ -5,7 +5,7 @@ $faq_items = get_field('faq_items');
 ?>
 
         <section class="bb-faq-section">
-            <div class="container">
+            <div class="bb-container">
                 <span class="d-none d-lg-block"><?php echo esc_html($faq_title); ?></span>
                 <span class="d-block d-lg-none text-center"><?php echo esc_html($faq_title); ?></span>
                 <div class="bb-faq-title">

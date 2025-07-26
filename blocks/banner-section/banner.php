@@ -6,7 +6,7 @@ $button = get_field('button');
 $button_text = get_field('button_text');
 ?>
 <section class="hero-section position-relative" aria-labelledby="hero-heading">
-    <div class="container">
+    <div class="bb-container">
                 <?php if ($subheading): ?>
                     <span class="sub-title"><?php echo esc_html($subheading); ?></span>
                 <?php endif; ?>
