@@ -6,6 +6,10 @@
   "icon": "format-image",
   "keywords": ["banner", "section", "header"],
   "acf": {
+    "mode": "edit",
+    "supports": {
+      "mode": false
+    },
     "renderTemplate": "banner.php"
   }
 }

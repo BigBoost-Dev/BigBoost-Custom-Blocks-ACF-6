@@ -5,6 +5,10 @@
   "category": "bigboost-blocks",
   "icon": "format-gallery",
   "keywords": ["gallery", "images"],
+   "mode": "edit",
+  "supports": {
+    "mode": false
+  },
   "acf": {
     "renderTemplate": "gallery.php"
   }

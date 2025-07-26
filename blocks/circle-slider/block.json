@@ -6,6 +6,10 @@
   "icon": "products",
   "keywords": ["gallery", "images"],
   "acf": {
+    "mode": "edit",
+    "supports": {
+      "mode": false
+    },
     "renderTemplate": "circle-slider.php"
   }
 }

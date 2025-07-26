@@ -131,7 +131,7 @@ add_action( 'acf/init', function () {
         'title'    => 'Quote Section Block',
         'fields'   => [
             [ 'key' => 'field_banner_image', 'label' => 'Banner Image', 'name' => 'banner_image', 'type' => 'image', 'return_format' => 'array', 'preview_size' => 'thumbnail', 'library' => 'all' ],
-            [ 'key' => 'field_quote',        'label' => 'Quote',        'name' => 'quote',        'type' => 'textarea' ],
+            [ 'key' => 'field_quote',        'label' => 'Quote',        'name' => 'quote',        'type' => 'wysiwyg' ],
             [ 'key' => 'field_author',       'label' => 'Author',       'name' => 'author',       'type' => 'text'     ],
         ],
         'location' => [

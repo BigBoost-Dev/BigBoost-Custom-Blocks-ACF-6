@@ -6,6 +6,10 @@
   "icon": "admin-comments",
   "keywords": ["quote", "quote"],
   "acf": {
+    "mode": "edit",
+    "supports": {
+      "mode": false
+    },
     "renderTemplate": "quote.php"
   }
 }

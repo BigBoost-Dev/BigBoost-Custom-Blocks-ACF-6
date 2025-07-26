@@ -6,6 +6,10 @@
   "icon": "megaphone",
   "keywords": ["cta", "button"],
   "acf": {
+    "mode": "edit",
+    "supports": {
+      "mode": false
+    },
     "renderTemplate": "cta.php"
   }
 }
