@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(function ($) {
 
     let height = $('.bb-slider-content').outerHeight();
     $('.bb-slider-images').height(height);
