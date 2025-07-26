@@ -17,9 +17,9 @@ function bigboost_enqueue_global_assets() {
 
     wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
 
-    // Example: Swiper CSS & JS from CDN
-
-    wp_enqueue_script('jquery-js', 'https://code.jquery.com/jquery-3.6.4.min.js', array(), null, true);
+    // jQuery is bundled with WordPress so we rely on the core version to avoid
+    // loading it twice and potential conflicts.
+    wp_enqueue_script('jquery');
 
     // Example: Your plugin's custom CSS and JS (if you want)
     wp_enqueue_style('bigboost-global-css', plugin_dir_url(__FILE__) . 'assets/global.css');
