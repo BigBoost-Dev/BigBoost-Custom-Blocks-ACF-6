@@ -4,7 +4,7 @@ $author = get_field('field_author');
 $banner_image = get_field('banner_image')
 ?>
 <section class="quotes-section">
-    <div class="container">
+    <div class="bb-container">
 		<div class="row image-quote-block">
 			<div class="col-12 col-md-6 image-blocks">
 				<div class="hero-quote-img">

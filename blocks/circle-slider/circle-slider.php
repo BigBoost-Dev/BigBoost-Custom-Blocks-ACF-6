@@ -7,7 +7,7 @@ $section_items = get_field('field_circle_slider_items');
 ?>
 <?php if ($section_items) : ?>
     <section class="bb-circle-slider d-none d-lg-block">
-        <div class="container">
+        <div class="bb-container">
             <div class="row">
                 <!-- Left Content -->
                 <div class="col-12 col-lg-5">
@@ -71,7 +71,7 @@ $section_items = get_field('field_circle_slider_items');
 <?php endif; ?>
 <?php if ($section_items) : ?>
 	    <section class="bb-circle-slider d-block d-lg-none">
-            <div class="container">
+            <div class="bb-container">
                 <div class="row">
                     <div class="col-12">
                         <div class="bb-slider-content">
