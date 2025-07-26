@@ -3,312 +3,194 @@
 Plugin Name: BigBoost Custom Blocks (ACF 6+)
 Description: Enqueues global assets, syncs ACF JSON, whitelists BigBoost blocks, and
              auto‑registers every block folder that contains a block.json file.
-Version: 2.0
+Version: 2.1
 Author: BigBoost
 */
 
-if (!defined('ABSPATH')) exit;
-
-// Enqueue global CSS & JS libraries
-add_action('wp_enqueue_scripts', 'bigboost_enqueue_global_assets');
-function bigboost_enqueue_global_assets() {
-    // Example: Bootstrap CSS & JS from CDN
-    wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css');
-
-    wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
-
-    // jQuery is bundled with WordPress so we rely on the core version to avoid
-    // loading it twice and potential conflicts.
-    wp_enqueue_script('jquery');
-
-    // Example: Your plugin's custom CSS and JS (if you want)
-    wp_enqueue_style('bigboost-global-css', plugin_dir_url(__FILE__) . 'assets/global.css');
-
-    wp_enqueue_script('bigboost-global-js', plugin_dir_url(__FILE__) . 'assets/global.js', array('jquery'), null, true);
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-// Register blocks from block.json files
-add_action('init', 'bigboost_register_blocks');
-function bigboost_register_blocks() {
-    foreach (glob(plugin_dir_path(__FILE__) . 'blocks/*/block.json') as $block_path) {
-        // Ensure the file is readable before trying to register it.
-        if (!is_readable($block_path)) {
-            error_log(sprintf('BigBoost Custom Blocks: Block file %s is not readable.', $block_path));
-            continue;
-        }
+/*--------------------------------------------------------------
+ # 1.  Global CSS & JS
+--------------------------------------------------------------*/
+add_action( 'wp_enqueue_scripts', function () {
 
-        $json = file_get_contents($block_path);
-        if ($json === false) {
-            error_log(sprintf('BigBoost Custom Blocks: Unable to read %s.', $block_path));
-            continue;
-        }
+	// Bootstrap CSS
+	wp_enqueue_style(
+		'bigboost-bootstrap',
+		'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
+		[],
+		'5.0.2'
+	);
 
-        $data = json_decode($json, true);
+	// Plugin CSS
+	$css = plugin_dir_path( __FILE__ ) . 'assets/global.css';
+	if ( file_exists( $css ) ) {
+		wp_enqueue_style(
+			'bigboost-global',
+			plugin_dir_url( __FILE__ ) . 'assets/global.css',
+			[],
+			filemtime( $css )
+		);
+	}
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            error_log(sprintf('BigBoost Custom Blocks: Invalid JSON in %s - %s', $block_path, json_last_error_msg()));
-            continue;
-        }
+	// jQuery (core)
+	wp_enqueue_script( 'jquery' );
 
-        // Validate required block properties before registering.
-        $required = array('name', 'title', 'category');
-        $missing  = array();
+	
 
-        foreach ($required as $key) {
-            if (empty($data[$key])) {
-                $missing[] = $key;
-            }
-        }
+	// Plugin JS
+	$js = plugin_dir_path( __FILE__ ) . 'assets/global.js';
+	if ( file_exists( $js ) ) {
+		wp_enqueue_script(
+			'bigboost-global',
+			plugin_dir_url( __FILE__ ) . 'assets/global.js',
+			[ 'jquery' ],
+			filemtime( $js ),
+			true
+		);
+	}
+} );
 
-        if (isset($data['acf']) && isset($data['acf']['renderTemplate'])) {
-            // Include render template path check as part of validation
-            if (!is_string($data['acf']['renderTemplate']) || $data['acf']['renderTemplate'] === '') {
-                $missing[] = 'acf.renderTemplate';
-            }
-        } else {
-            $missing[] = 'acf.renderTemplate';
-        }
+/*--------------------------------------------------------------
+ # 2.  ACF JSON sync
+--------------------------------------------------------------*/
+add_filter( 'acf/settings/save_json', fn() => plugin_dir_path( __FILE__ ) . 'acf-json' );
 
-        if ($missing) {
-            error_log(sprintf('BigBoost Custom Blocks: Missing required data (%s) in %s', implode(', ', $missing), $block_path));
-            continue;
-        }
+add_filter( 'acf/settings/load_json', function ( $paths ) {
+	unset( $paths[0] );                                   // remove theme path
+	$paths[] = plugin_dir_path( __FILE__ ) . 'acf-json';
+	return $paths;
+} );
 
-        register_block_type($block_path);
-    }
-}
+/*--------------------------------------------------------------
+ # 3.  **AUTO‑REGISTER** every block that has block.json
+--------------------------------------------------------------*/
+add_action( 'init', function () {
 
-// Add custom block category
-add_filter('block_categories_all', 'bigboost_custom_block_category', 10, 2);
-function bigboost_custom_block_category($categories, $post) {
-    return array_merge(
-        $categories,
-        array(
-            array(
-                'slug'  => 'bigboost-blocks',
-                'title' => __('BigBoost Blocks', 'bigboost-custom-blocks'),
-                'icon'  => null,
-            )
-        )
-    );
-}
+	$block_dirs = glob( plugin_dir_path( __FILE__ ) . 'blocks/*', GLOB_ONLYDIR );
 
-// ACF JSON Sync
-add_filter('acf/settings/save_json', function() {
-    return plugin_dir_path(__FILE__) . 'acf-json';
-});
+	foreach ( $block_dirs as $dir ) {
+		if ( file_exists( $dir . '/block.json' ) ) {
+			register_block_type( $dir );                  // core function — ACF reads the "acf" section
+		}
+	}
+} );
 
-add_filter('acf/settings/load_json', function($paths) {
-    $paths[] = plugin_dir_path(__FILE__) . 'acf-json';
-    return $paths;
-});
+/*--------------------------------------------------------------
+ # 4.  VIP‑Go whitelist
+--------------------------------------------------------------*/
+add_filter( 'allowed_block_types_all', function ( $allowed, $ctx ) {
 
-// Register ACF Fields Automatically
-add_action('acf/init', 'bigboost_register_acf_fields');
-function bigboost_register_acf_fields() {
-    if (function_exists('acf_add_local_field_group')) {
+	if ( empty( $ctx->post ) ) {
+		return $allowed;
+	}
 
-        // Banner Section Block Fields
-        acf_add_local_field_group(array(
-            'key' => 'group_banner_section',
-            'title' => 'Banner Section Block',
-            'fields' => array(
-                array(
-                    'key' => 'field_subheading',
-                    'label' => 'Subheading',
-                    'name' => 'subheading',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_heading',
-                    'label' => 'Heading',
-                    'name' => 'heading',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_description',
-                    'label' => 'Description',
-                    'name' => 'description',
-                    'type' => 'textarea',
-                ),
-                array(
-                    'key' => 'field_button',
-                    'label' => 'Button Link',
-                    'name' => 'button',
-                    'type' => 'link',
-                ),
-                array(
-                    'key' => 'field_button_text',
-                    'label' => 'Button Text',
-                    'name' => 'button_text',
-                    'type' => 'text',
-                ),
-               
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'block',
-                        'operator' => '==',
-                        'value' => 'acf/banner-section',
-                    ),
-                ),
-            ),
-        ));
+	$custom = [
+		'acf/banner-section',
+		'acf/quote-section',
+		'acf/call-to-action',
+		'acf/gallery',
+		'acf/faq',
+        'acf/circle-slider',
+	];
 
-        // Quote Section Block Fields
-        acf_add_local_field_group(array(
-            'key' => 'group_quote_section',
-            'title' => 'Quote Section Block',
-            'fields' => array(
-				 array(
-                    'key' => 'field_banner_image',
-                    'label' => 'Banner Image',
-                    'name' => 'banner_image',
-                    'type' => 'image',
-                    'return_format' => 'array',
-                    'preview_size' => 'thumbnail',
-                    'library' => 'all',
-                ),
-            
-                array(
-                    'key' => 'field_quote',
-                    'label' => 'Quote',
-                    'name' => 'quote',
-                    'type' => 'textarea',
-                ),
-                array(
-                    'key' => 'field_author',
-                    'label' => 'Author',
-                    'name' => 'author',
-                    'type' => 'text',
-                ),
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'block',
-                        'operator' => '==',
-                        'value' => 'acf/quote-section',
-                    ),
-                ),
-            ),
-        ));
+	if ( ! is_array( $allowed ) ) {
+		return true;
+	}
 
-        // FAQ Section Block Fields
-        acf_add_local_field_group(array(
-            'key' => 'group_faq_section',
-            'title' => 'FAQ Section Block',
-            'fields' => array(
-            
-                array(
-                    'key' => 'field_faq_title',
-                    'label' => 'Title',
-                    'name' => 'faq_title',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_faq_items',
-                    'label' => 'FAQ Items',
-                    'name' => 'faq_items',
-                    'type' => 'repeater',
-                    'button_label' => 'Add FAQ',
-                    'sub_fields' => array(
-                       array(
-                            'key' => 'field_faq_question',
-                            'label' => 'Question',
-                            'name' => 'question',
-                            'type' => 'wysiwyg', // changed from 'text' to 'wysiwyg'
-                            'tabs' => 'all',
-                            'toolbar' => 'basic',
-                            'media_upload' => 0,
-                        ),
-                        array(
-                            'key' => 'field_faq_answer',
-                            'label' => 'Answer',
-                            'name' => 'answer',
-                            'type' => 'wysiwyg', // changed from 'textarea' to 'wysiwyg'
-                            'tabs' => 'all',
-                            'toolbar' => 'basic',
-                            'media_upload' => 1,
-                        ),
-                    ),
-                ),
+	return array_values( array_unique( array_merge( $allowed, $custom ) ) );
 
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'block',
-                        'operator' => '==',
-                        'value' => 'acf/faq',
-                    ),
-                ),
-            ),
-        ));
+}, 100, 2 );
+
+/*--------------------------------------------------------------
+ # 5.  In‑code ACF field groups (same as before)
+--------------------------------------------------------------*/
+add_action( 'acf/init', function () {
+    // Banner Section Block Fields
+    acf_add_local_field_group( [
+        'key'      => 'group_banner_section',
+        'title'    => 'Banner Section Block',
+        'fields'   => [
+            [ 'key' => 'field_subheading',   'label' => 'Subheading',      'name' => 'subheading',   'type' => 'text'     ],
+            [ 'key' => 'field_heading',      'label' => 'Heading',         'name' => 'heading',      'type' => 'text'     ],
+            [ 'key' => 'field_description',  'label' => 'Description',     'name' => 'description',  'type' => 'textarea' ],
+            [ 'key' => 'field_button',       'label' => 'Button Link',     'name' => 'button',       'type' => 'link'     ],
+            [ 'key' => 'field_button_text',  'label' => 'Button Text',     'name' => 'button_text',  'type' => 'text'     ],
+        ],
+        'location' => [
+            [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/banner-section' ] ],
+        ],
+    ] );
 
 
-        // Call to Action Block Fields
-        acf_add_local_field_group(array(
-            'key' => 'group_call_to_action',
-            'title' => 'Call to Action Block',
-            'fields' => array(
-                array(
-                    'key' => 'field_cta_title',
-                    'label' => 'CTA Title',
-                    'name' => 'cta_title',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_cta_description',
-                    'label' => 'CTA Description',
-                    'name' => 'cta_description',
-                    'type' => 'textarea',
-                ),
-                array(
-                    'key' => 'field_cta_button',
-                    'label' => 'CTA Button',
-                    'name' => 'cta_button',
-                    'type' => 'link',
-                ),
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'block',
-                        'operator' => '==',
-                        'value' => 'acf/call-to-action',
-                    ),
-                ),
-            ),
-        ));
+	// Quote Section Block Fields
+    acf_add_local_field_group( [
+        'key'      => 'group_quote_section',
+        'title'    => 'Quote Section Block',
+        'fields'   => [
+            [ 'key' => 'field_banner_image', 'label' => 'Banner Image', 'name' => 'banner_image', 'type' => 'image', 'return_format' => 'array', 'preview_size' => 'thumbnail', 'library' => 'all' ],
+            [ 'key' => 'field_quote',        'label' => 'Quote',        'name' => 'quote',        'type' => 'textarea' ],
+            [ 'key' => 'field_author',       'label' => 'Author',       'name' => 'author',       'type' => 'text'     ],
+        ],
+        'location' => [
+            [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/quote-section' ] ],
+        ],
+    ] );
 
-        // Gallery Block Fields
-        acf_add_local_field_group(array(
-            'key' => 'group_gallery',
-            'title' => 'Gallery Block',
-            'fields' => array(
-                array(
-                    'key' => 'field_gallery_images',
-                    'label' => 'Gallery Images',
-                    'name' => 'gallery_images',
-                    'type' => 'gallery',
-                    'preview_size' => 'thumbnail',
-                    'library' => 'all',
-                ),
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'block',
-                        'operator' => '==',
-                        'value' => 'acf/gallery',
-                    ),
-                ),
-            ),
-        ));
 
-        // Circle Slider Block Fields
+	// FAQ Section
+	acf_add_local_field_group( [
+		'key'    => 'group_faq_section',
+		'title'  => 'FAQ Section Block',
+		'fields' => [
+			[ 'key' => 'field_faq_title', 'label' => 'Title', 'name' => 'faq_title', 'type' => 'text' ],
+			[
+				'key' => 'field_faq_items',
+				'label' => 'FAQ Items',
+				'name' => 'faq_items',
+				'type' => 'repeater',
+				'button_label' => 'Add FAQ',
+				'sub_fields' => [
+					[ 'key' => 'field_faq_question', 'label' => 'Question', 'name' => 'question', 'type' => 'wysiwyg' ],
+					[ 'key' => 'field_faq_answer',   'label' => 'Answer',   'name' => 'answer',   'type' => 'wysiwyg' ],
+				],
+			],
+		],
+		'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/faq' ] ] ],
+	] );
+
+	// Call‑to‑Action
+	acf_add_local_field_group( [
+		'key'    => 'group_call_to_action',
+		'title'  => 'Call to Action Block',
+		'fields' => [
+			[ 'key' => 'field_cta_title',       'label' => 'CTA Title',       'name' => 'cta_title',       'type' => 'text'     ],
+			[ 'key' => 'field_cta_description', 'label' => 'CTA Description', 'name' => 'cta_description', 'type' => 'textarea' ],
+			[ 'key' => 'field_cta_button',      'label' => 'CTA Button',      'name' => 'cta_button',      'type' => 'link'     ],
+		],
+		'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/call-to-action' ] ] ],
+	] );
+
+	// Gallery
+	acf_add_local_field_group( [
+		'key'    => 'group_gallery',
+		'title'  => 'Gallery Block',
+		'fields' => [
+			[
+				'key'          => 'field_gallery_images',
+				'label'        => 'Gallery Images',
+				'name'         => 'gallery_images',
+				'type'         => 'gallery',
+				'preview_size' => 'thumbnail',
+				'library'      => 'all',
+			],
+		],
+		'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/gallery' ] ] ],
+	] );
+// Circle Slider Block Fields
+// Circle Slider Block Fields
         acf_add_local_field_group(array(
             'key' => 'group_circle_slider_section',
             'title' => 'Circle Slider Block',
@@ -378,5 +260,7 @@ function bigboost_register_acf_fields() {
                 ),
             ),
         ));
-    }
-}
+
+
+
+} );
