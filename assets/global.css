@@ -713,3 +713,70 @@ a {
   color: #232323;
   text-align: right;
 }
+/* 1) Base blockquote styling */
+.quote-line {
+  position: relative;
+  margin: 0;               /* remove default margins */
+  padding: 2rem 1.5rem;     /* space for text and quote icons */
+  font-style: normal;       /* make sure it’s not italic */
+  line-height: 1.5;
+  color: #232323;
+}
+
+/* 2) Opening quote via ::before */
+.quote-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;   /* size of your start.png */
+  height: 32px;
+  background: url('https://www.gfm-test01.com/c/wp-content/uploads/2025/07/start.png') no-repeat center/contain;
+  transform: translate(375%,65%);  /* nudge above the box */
+}
+
+/* 3) Closing quote via ::after */
+.quote-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;   /* size of your end.png */
+  height: 32px;
+  background: url('https://www.gfm-test01.com/c/wp-content/uploads/2025/07/end.png') no-repeat center/contain;
+  transform: translate(-1160%,-180%);  /* nudge below the box */
+}
+
+/* 4) Author styling */
+.quote-author {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: right;
+  color: #232323;
+}
+blockquote{
+    border:none !important;
+}
+.quote-author {
+  display: block;
+  margin-top: 0 !important;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center !important;
+  color: #232323 !important;
+  text-decoration: none !important;
+  font-style: normal;
+}
+@media (max-width: 768px) {
+   .quote-line::before {
+  transform: translate(40%,65%);  /* nudge above the box */
+  }
+  .quote-line::after {
+    transform: translate(-460%,-180%);  /* nudge below the box */
+}
+}
+cite::before {
+  display: none;
+}
