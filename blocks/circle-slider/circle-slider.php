@@ -6,32 +6,32 @@ $section_tag = get_field('field_circle_slider_tag');
 $section_items = get_field('field_circle_slider_items');
 ?>
 <?php if ($section_items) : ?>
-    <section class="circle-slider d-none d-lg-block">
+    <section class="bb-circle-slider d-none d-lg-block">
         <div class="container">
             <div class="row">
                 <!-- Left Content -->
                 <div class="col-12 col-lg-5">
-                    <div class="slider-content">
+                    <div class="bb-slider-content">
                         <?php if ($section_tag) : ?>
-                            <span class="border-view"><?php echo esc_html($section_tag); ?></span>
+                            <span class="bb-border-view"><?php echo esc_html($section_tag); ?></span>
                         <?php endif; ?>
 
                         <?php if ($section_title) : ?>
                             <h2><?php echo esc_html($section_title); ?></h2>
                         <?php endif; ?>
 
-                        <div class="slider-context">
+                        <div class="bb-slider-context">
                             <?php foreach ($section_items as $index => $item) : ?>
                                 <div>
-                                    <a href="#" class="d-flex align-items-center slider-actions">
+                                    <button type="button" class="d-flex align-items-center bb-slider-actions">
                                         <div>
-                                            <div class="cirle-outline">
+                                            <div class="bb-circle-outline">
                                                 <span><?php echo esc_html($item['step_number']); ?></span>
                                             </div>
                                         </div>
                                         <h3><?php echo esc_html($item['step_title']); ?></h3>
-                                    </a>
-                                    <div class="description" <?php echo ($index === 0) ? 'style="display: block;"' : ''; ?>>
+                                    </button>
+                                    <div class="bb-slider-description" <?php echo ($index === 0) ? 'style="display: block;"' : ''; ?>>
                                         <p><?php echo esc_html($item['step_description']); ?></p>
                                     </div>
                                 </div>
@@ -42,17 +42,17 @@ $section_items = get_field('field_circle_slider_items');
                 
                 <!-- Right Images -->
                 <div class="col-12 col-lg-7">
-                    <div class="slider-images">
+                    <div class="bb-slider-images">
                         <?php foreach ($section_items as $index => $item) : ?>
-                            <div class="slider-item <?php echo ($index === 0) ? 'active' : 'next'; ?>">
-                                <div class="big-img">
+                            <div class="bb-slider-item <?php echo ($index === 0) ? 'active' : 'next'; ?>">
+                                <div class="bb-big-img">
                                     <?php if (!empty($item['main_image'])) : ?>
-                                        <img src="<?php echo esc_url($item['main_image']['url']); ?>" alt="">
+                                        <img src="<?php echo esc_url($item['main_image']['url']); ?>" alt="<?php echo esc_attr($item['main_image']['alt'] ?: $item['step_title']); ?>">
                                     <?php endif; ?>
 
                                     <?php if (!empty($item['ui_image'])) : ?>
-                                        <div class="ui-img">
-                                            <img src="<?php echo esc_url($item['ui_image']['url']); ?>" alt="">
+                                        <div class="bb-ui-img">
+                                            <img src="<?php echo esc_url($item['ui_image']['url']); ?>" alt="<?php echo esc_attr($item['ui_image']['alt'] ?: $item['step_title']); ?>">
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -65,29 +65,29 @@ $section_items = get_field('field_circle_slider_items');
     </section>
 <?php endif; ?>
 <?php if ($section_items) : ?>
-	    <section class="circle-slider d-block d-lg-none">
+	    <section class="bb-circle-slider d-block d-lg-none">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="slider-content">
-                            <!-- <span class="border-view">Best practices</span> -->
+                        <div class="bb-slider-content">
+                            <!-- <span class="bb-border-view">Best practices</span> -->
                             <h2> <?php echo esc_html($section_title); ?> </h2>
-                           <div class="slider-context">
+                           <div class="bb-slider-context">
 								<?php foreach ($section_items as $index => $item) : ?>
                                 <div>
-                                    <a href="" class="d-flex align-items-center toggle-slider mb-3">
+                                    <button type="button" class="d-flex align-items-center bb-toggle-slider mb-3">
                                         <div>
-                                            <div class="cirle-outline">
+                                            <div class="bb-circle-outline">
                                                 <span> <?php echo esc_html($item['step_number']); ?> </span>
                                             </div>
                                         </div>
                                         <h3><?php echo esc_html($item['step_title']); ?></h3>
-                                    </a>
-                                    <div class="description">
+                                    </button>
+                                    <div class="bb-slider-description">
                                         <p>
                                            <?php echo esc_html($item['step_description']); ?>
                                         </p>
-                                        <img src="<?php echo esc_url($item['ui_image']['url']); ?>" alt="">
+                                        <img src="<?php echo esc_url($item['ui_image']['url']); ?>" alt="<?php echo esc_attr($item['ui_image']['alt'] ?: $item['step_title']); ?>">
                                     </div>
                                 </div>
 								<?php endforeach; ?>

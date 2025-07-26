@@ -1,13 +1,13 @@
 $(document).ready(function () {
 
-    let height = $('.slider-content').outerHeight();
-    $('.slider-images').height(height);
+    let height = $('.bb-slider-content').outerHeight();
+    $('.bb-slider-images').height(height);
     let previousIndex = 0;
 
-    $('.slider-actions').on('click', function (e) {
+    $('.bb-slider-actions').on('click', function (e) {
         e.preventDefault();
-        const targetIndex = $('.slider-actions').index(this);
-        const items = $('.slider-item');
+        const targetIndex = $('.bb-slider-actions').index(this);
+        const items = $('.bb-slider-item');
 
         // Prevent multiple clicks during animation
         if (isAnimating) return;
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
         function animateStep(currentIndex, targetIndex, isForward) {
             const classes = isForward ? clForward : clReverse;
-            $('.slider-item').removeClass('previous active next next-next pre-pre d-none');
+            $('.bb-slider-item').removeClass('previous active next next-next pre-pre d-none');
 
             for (let i = 0; i < classes[currentIndex]?.length; i++) {
                 $(items[i]).addClass(`${classes[currentIndex][i]}`)
@@ -62,8 +62,8 @@ $(document).ready(function () {
             function nextStep() {
                 if (current === target) {
                     previousIndex = target;
-                    $('.description').slideUp(300);
-                    $($('.slider-actions')[target]).closest('div').find('.description').slideToggle(300);
+                    $('.bb-slider-description').slideUp(300);
+                    $($('.bb-slider-actions')[target]).closest('div').find('.bb-slider-description').slideToggle(300);
                     isAnimating = false;
                     return;
                 }
@@ -82,32 +82,32 @@ $(document).ready(function () {
 
     });
 
-    $('.toggle-slider').on('click', function (e) {
+    $('.bb-toggle-slider').on('click', function (e) {
         e.preventDefault();
         if ($(this).closest('div').hasClass('active')) {
-            $('.slider-context > div').removeClass('active')
-            $(this).closest('div').find('.description').slideUp()
+            $('.bb-slider-context > div').removeClass('active')
+            $(this).closest('div').find('.bb-slider-description').slideUp()
         } else {
-            $('.slider-context > div').removeClass('active')
+            $('.bb-slider-context > div').removeClass('active')
             $(this).closest('div').addClass('active')
-            $('.description').slideUp()
-            $(this).closest('div').find('.description').slideToggle()
+            $('.bb-slider-description').slideUp()
+            $(this).closest('div').find('.bb-slider-description').slideToggle()
         }
     })
 
     // Initialize animation state
     let isAnimating = false;
 
-    $('.downarrow').on('click', function (e) {
+    $('.bb-downarrow').on('click', function (e) {
         e.preventDefault();
-        if ($(this).closest('.d-flex.justify-content-between').next('.description').hasClass('active')) {
-            $('.description').slideUp(100)
-            $(this).closest('.d-flex.justify-content-between').next('.description').removeClass('active')
+        if ($(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').hasClass('active')) {
+            $('.bb-faq-description').slideUp(100)
+            $(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').removeClass('active')
         } else {
-            $('.faq-title').find('.description').removeClass('active')
-            $('.description').slideUp(100)
-            $(this).closest('.d-flex.justify-content-between').next('.description').slideToggle(300)
-            $(this).closest('.d-flex.justify-content-between').next('.description').addClass('active')
+            $('.bb-faq-title').find('.bb-faq-description').removeClass('active')
+            $('.bb-faq-description').slideUp(100)
+            $(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').slideToggle(300)
+            $(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').addClass('active')
         }
 
     })
