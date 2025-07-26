@@ -248,8 +248,15 @@ a {
     padding-bottom: 20px;
 }
 
-.quotes-section p img {
-    vertical-align: baseline;
+.quotes-section p.quote-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quotes-section p.quote-line img {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .quotes-blocks img {
