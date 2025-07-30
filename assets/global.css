@@ -648,7 +648,9 @@ a {
 @media (max-width: 768px) {
         .hero-quote-img{
                 padding-bottom:20px !important;
-                margin-top:0;
+                margin-top:-100px;
+                position:relative;
+                z-index:2;
         }
         .hero-section{
                 padding-top:65px;
