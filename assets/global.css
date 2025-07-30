@@ -457,6 +457,23 @@ a {
     position: relative;
 }
 
+.bb-circle-slider .bb-slider-content .bb-circle-outline svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.bb-circle-slider .bb-slider-content .bb-circle-outline .progress-ring__circle {
+    stroke: var(--yellow);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+}
+
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-circle-outline span {
     position: absolute;
     top: 50%;
@@ -516,6 +533,8 @@ a {
     position: relative;
     height: 100%;
     width: fit-content;
+    transition: transform 0.5s ease;
+    transform: translate(0,0) scale(1);
 }
 
 .bb-circle-slider .bb-slider-images .bb-slider-item>div .bb-ui-img {
@@ -523,6 +542,17 @@ a {
     position: absolute;
     bottom: 24px;
     left: -130px;
+    transition: transform 0.5s ease;
+    transition-delay: 0.2s;
+    transform: translate(0,0) scale(1);
+}
+
+.bb-circle-slider .bb-slider-images .bb-slider-item.active > div .bb-big-img {
+    transform: translate(0,0) scale(1.1);
+}
+
+.bb-circle-slider .bb-slider-images .bb-slider-item.active > div .bb-ui-img {
+    transform: translate(-10px,-10px) scale(1.1);
 }
 
 .bb-circle-slider .bb-slider-images .bb-slider-item.active {

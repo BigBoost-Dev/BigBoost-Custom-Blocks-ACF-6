@@ -28,6 +28,9 @@ $section_items = get_field('field_circle_slider_items');
 
                                         <div>
                                             <div class="bb-circle-outline">
+                                                <svg class="progress-ring" viewBox="0 0 36 36">
+                                                    <circle class="progress-ring__circle" cx="18" cy="18" r="16"></circle>
+                                                </svg>
                                                 <span><?php echo esc_html($item['step_number']); ?></span>
                                             </div>
                                         </div>
@@ -84,6 +87,9 @@ $section_items = get_field('field_circle_slider_items');
                                     <button type="button" class="d-flex align-items-center bb-toggle-slider mb-3">
                                         <div>
                                             <div class="bb-circle-outline">
+                                                <svg class="progress-ring" viewBox="0 0 36 36">
+                                                    <circle class="progress-ring__circle" cx="18" cy="18" r="16"></circle>
+                                                </svg>
                                                 <span> <?php echo esc_html($item['step_number']); ?> </span>
                                             </div>
                                         </div>
@@ -95,7 +101,16 @@ $section_items = get_field('field_circle_slider_items');
                                         <p>
                                            <?php echo esc_html($item['step_description']); ?>
                                         </p>
-                                        <img src="<?php echo esc_url($item['ui_image']['url']); ?>" alt="<?php echo esc_attr($item['ui_image']['alt'] ?: $item['step_title']); ?>">
+                                        <?php 
+                                            $mobileMain = !empty($item['mobile_main_image']) ? $item['mobile_main_image'] : $item['main_image'];
+                                            $mobileUI = !empty($item['mobile_ui_image']) ? $item['mobile_ui_image'] : $item['ui_image'];
+                                        ?>
+                                        <?php if (!empty($mobileMain)) : ?>
+                                            <img src="<?php echo esc_url($mobileMain['url']); ?>" alt="<?php echo esc_attr($mobileMain['alt'] ?: $item['step_title']); ?>">
+                                        <?php endif; ?>
+                                        <?php if (!empty($mobileUI)) : ?>
+                                            <img src="<?php echo esc_url($mobileUI['url']); ?>" alt="<?php echo esc_attr($mobileUI['alt'] ?: $item['step_title']); ?>">
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 								<?php endforeach; ?>
