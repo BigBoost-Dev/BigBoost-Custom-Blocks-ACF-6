@@ -138,6 +138,13 @@ jQuery(function ($) {
     // Initialize animation state
     let isAnimating = false;
 
+    function resetFaq() {
+        $('.bb-faq-description').stop(true, true).slideUp(200).removeClass('active');
+        $('.bb-faq-icon').each(function(){
+            $(this).attr('src', $(this).data('add'));
+        });
+    }
+
     $('.bb-downarrow').on('click', function (e) {
         e.preventDefault();
         const wrapper = $(this).closest('.d-flex.justify-content-between');
@@ -145,18 +152,11 @@ jQuery(function ($) {
         const icon = $(this).find('.bb-faq-icon');
 
         if (desc.hasClass('active')) {
-            $('.bb-faq-description').slideUp(100).removeClass('active');
-            $('.bb-faq-icon').each(function(){
-                $(this).attr('src', $(this).data('add'));
-            });
+            resetFaq();
         } else {
-            $('.bb-faq-description').slideUp(100).removeClass('active');
-            $('.bb-faq-icon').each(function(){
-                $(this).attr('src', $(this).data('add'));
-            });
-            desc.slideToggle(300).addClass('active');
+            resetFaq();
+            desc.stop(true, true).slideDown(300).addClass('active');
             icon.attr('src', icon.data('subtract'));
-            return;
         }
     })
 
