@@ -1,5 +1,8 @@
 jQuery(function ($) {
 
+    const DURATION = 7000; // ms – keep in sync with CSS & autoplay
+    const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * 24;
+
     let height = $('.bb-slider-content').outerHeight();
     $('.bb-slider-images').height(height);
     let previousIndex = 0;
@@ -7,11 +10,18 @@ jQuery(function ($) {
 
     function startProgress(index) {
         const circles = $('.bb-circle-outline .progress-ring__circle');
-        circles.css({'transition':'none','stroke-dashoffset':100});
+        circles.css({
+            'transition': 'none',
+            'stroke-dasharray': PROGRESS_CIRCUMFERENCE,
+            'stroke-dashoffset': PROGRESS_CIRCUMFERENCE
+        });
         const circle = circles.eq(index);
         if(circle.length){
             circle[0].getBoundingClientRect();
-            circle.css({'transition':'stroke-dashoffset 7s linear','stroke-dashoffset':0});
+            circle.css({
+                'transition': `stroke-dashoffset ${DURATION/1000}s linear`,
+                'stroke-dashoffset': 0
+            });
         }
     }
 
@@ -24,7 +34,7 @@ jQuery(function ($) {
                 let next = (previousIndex + 1) % actions.length;
                 $(actions[next]).trigger('click');
             }
-        },7000);
+        }, DURATION);
     }
 
     function stopAuto(){
