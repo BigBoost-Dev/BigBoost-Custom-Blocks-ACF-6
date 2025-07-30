@@ -187,6 +187,11 @@ a {
         font-size: 48px;
         font-family: 'GoFundMe';
         padding-bottom:24px;
+        margin:0;
+    }
+
+    .hero-section p.description-banner {
+        margin-top:0;
     }
 }
 
@@ -641,16 +646,30 @@ a {
 }
 
 @media (max-width: 768px) {
-	.hero-quote-img{
-		padding-bottom:20px !important;
-	}
-	.hero-section{
-		padding-top:65px;
-	}
-	.hero-section p
-	 {
-	 font-size: 14px !important;
-	}
+        .hero-quote-img{
+                padding-bottom:20px !important;
+                margin-top:-100px;
+        }
+        .hero-section{
+                padding-top:65px;
+        }
+        .hero-section p
+         {
+         font-size: 14px !important;
+        }
+
+        .bb-circle-slider .bb-slider-description img + img {
+            display: none;
+        }
+
+        .bb-circle-slider .bb-slider-description img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .bb-circle-slider .bb-slider-context>div.step-4 .bb-slider-description img {
+            display: none;
+        }
     .survey h2 {
         font-weight: 700;
         font-size: 48px !important;
@@ -857,4 +876,21 @@ blockquote{
 }
 cite::before {
   display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-cta-button {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 344px;
+        background-color: #0B291A;
+        color: var(--white);
+        font-weight: 800;
+        font-size: 16px;
+        padding: 8px 0;
+        text-align: center;
+        z-index: 9999;
+    }
 }

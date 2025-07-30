@@ -53,6 +53,10 @@ add_action( 'wp_enqueue_scripts', function () {
         }
 } );
 
+add_action( 'wp_footer', function () {
+    echo '<a href="#" class="mobile-cta-button d-lg-none">' . esc_html__( 'Start a GoFundMe', 'bigboost' ) . '</a>';
+} );
+
 // Preload fonts early to prevent layout shifts on FAQ toggle
 add_action( 'wp_head', function () {
         $font_path = plugin_dir_path( __FILE__ ) . 'assets/fonts/';
