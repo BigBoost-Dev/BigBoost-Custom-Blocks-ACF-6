@@ -622,9 +622,12 @@ a {
     }
 
     .bb-circle-slider .bb-slider-content h2,
-    .bb-circle-slider .bb-slider-content > p,
-    .bb-circle-slider .bb-slider-content .bb-slider-context>div h3 {
+    .bb-circle-slider .bb-slider-content > p {
         text-align: center;
+    }
+
+    .bb-circle-slider .bb-slider-content .bb-slider-context>div h3 {
+        text-align: left;
     }
 
     .bb-circle-slider .bb-slider-content p a {

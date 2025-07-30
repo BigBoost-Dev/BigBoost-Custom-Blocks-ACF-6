@@ -140,16 +140,24 @@ jQuery(function ($) {
 
     $('.bb-downarrow').on('click', function (e) {
         e.preventDefault();
-        if ($(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').hasClass('active')) {
-            $('.bb-faq-description').slideUp(100)
-            $(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').removeClass('active')
-        } else {
-            $('.bb-faq-title').find('.bb-faq-description').removeClass('active')
-            $('.bb-faq-description').slideUp(100)
-            $(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').slideToggle(300)
-            $(this).closest('.d-flex.justify-content-between').next('.bb-faq-description').addClass('active')
-        }
+        const wrapper = $(this).closest('.d-flex.justify-content-between');
+        const desc = wrapper.next('.bb-faq-description');
+        const icon = $(this).find('.bb-faq-icon');
 
+        if (desc.hasClass('active')) {
+            $('.bb-faq-description').slideUp(100).removeClass('active');
+            $('.bb-faq-icon').each(function(){
+                $(this).attr('src', $(this).data('add'));
+            });
+        } else {
+            $('.bb-faq-description').slideUp(100).removeClass('active');
+            $('.bb-faq-icon').each(function(){
+                $(this).attr('src', $(this).data('add'));
+            });
+            desc.slideToggle(300).addClass('active');
+            icon.attr('src', icon.data('subtract'));
+            return;
+        }
     })
 
     const sliderSection = $('.bb-circle-slider').first();

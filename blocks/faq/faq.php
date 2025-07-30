@@ -16,8 +16,7 @@ $faq_items = get_field('faq_items');
                            <?php echo wp_kses_post($faq['question']); ?>
                             <div>
                                 <button type="button" class="bb-faq-toggle">
-                                    <img class="d-none d-lg-block" src="<?php echo plugin_dir_url(__FILE__); ?>../../assets/images/downarrow.png" alt="Toggle answer">
-                                    <img class="d-block d-lg-none" src="<?php echo plugin_dir_url(__FILE__); ?>../../assets/images/add.png" alt="Toggle answer">
+                                    <img class="bb-faq-icon" src="<?php echo plugin_dir_url(__FILE__); ?>../../assets/images/add.png" data-add="<?php echo plugin_dir_url(__FILE__); ?>../../assets/images/add.png" data-subtract="<?php echo plugin_dir_url(__FILE__); ?>../../assets/images/subtract.png" alt="Toggle answer">
                                 </button>
                             </div>
                         </div>
