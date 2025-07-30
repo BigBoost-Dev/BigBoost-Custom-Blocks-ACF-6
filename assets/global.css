@@ -194,6 +194,11 @@ a {
     font-family: 'GoFundMe';
     font-weight: 400;
 }
+.hero-section p.description-banner {
+    max-width: 1014px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .hero-section .primary-button {
     margin-top: 49px;
