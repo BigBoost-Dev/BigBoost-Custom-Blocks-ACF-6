@@ -161,7 +161,7 @@ add_action( 'acf/init', function () {
                     'label'         => 'Mobile CTA URL',
                     'name'          => 'mobile_cta_url',
                     'type'          => 'url',
-                    'default_value' => 'https://www.gofundme.com/start',
+                    'default_value' => home_url( '/create/fundraiser/category' ),
                 ],
             ],
             'location' => [ [ [ 'param' => 'options_page', 'operator' => '==', 'value' => 'theme-settings' ] ] ],

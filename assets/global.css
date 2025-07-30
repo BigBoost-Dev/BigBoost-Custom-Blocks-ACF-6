@@ -649,6 +649,8 @@ a {
         .hero-quote-img{
                 padding-bottom:20px !important;
                 margin-top:-100px;
+                position:relative;
+                z-index:2;
         }
         .hero-section{
                 padding-top:65px;
@@ -884,6 +886,7 @@ cite::before {
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+        display: block;
         width: calc(100% - 2rem);
         max-width: 344px;
         background-color: #0B291A;
