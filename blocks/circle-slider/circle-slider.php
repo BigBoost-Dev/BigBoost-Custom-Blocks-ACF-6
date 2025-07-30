@@ -22,7 +22,7 @@ $section_items = get_field('field_circle_slider_items');
 
                         <div class="bb-slider-context">
                             <?php foreach ($section_items as $index => $item) : ?>
-                                <div>
+                                <div class="step-<?php echo $index + 1; ?>">
 
                                     <button type="button" class="d-flex align-items-center bb-slider-actions">
 
@@ -101,19 +101,15 @@ $section_items = get_field('field_circle_slider_items');
                                         <p>
                                            <?php echo esc_html($item['step_description']); ?>
                                         </p>
-                                        <?php 
+                                        <?php
                                             $mobileMain = !empty($item['mobile_main_image']) ? $item['mobile_main_image'] : $item['main_image'];
-                                            $mobileUI = !empty($item['mobile_ui_image']) ? $item['mobile_ui_image'] : $item['ui_image'];
                                         ?>
-                                        <?php if (!empty($mobileMain)) : ?>
-                                            <img src="<?php echo esc_url($mobileMain['url']); ?>" alt="<?php echo esc_attr($mobileMain['alt'] ?: $item['step_title']); ?>">
-                                        <?php endif; ?>
-                                        <?php if (!empty($mobileUI)) : ?>
-                                            <img src="<?php echo esc_url($mobileUI['url']); ?>" alt="<?php echo esc_attr($mobileUI['alt'] ?: $item['step_title']); ?>">
+                                        <?php if ($index !== 3 && !empty($mobileMain)) : ?>
+                                            <img class="mobile-step-img" src="<?php echo esc_url($mobileMain['url']); ?>" alt="<?php echo esc_attr($mobileMain['alt'] ?: $item['step_title']); ?>">
                                         <?php endif; ?>
                                     </div>
                                 </div>
-								<?php endforeach; ?>
+                                                                <?php endforeach; ?>
 
                             </div>
                         </div>
