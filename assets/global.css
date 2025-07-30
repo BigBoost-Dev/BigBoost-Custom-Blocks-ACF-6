@@ -172,6 +172,14 @@ a {
     font-family: 'GoFundMe';
     font-weight: 700;
     padding: 20px 0;
+    max-width: 1014px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero-section h2 {
+    max-width: 1014px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (max-width: 992px) {
@@ -275,12 +283,18 @@ a {
     color: var(--green);
     font-size: 24px;
     font-family: 'GoFundMe';
-    font-weight: 500;
+    font-weight: 700;
     padding: 8px 24px;
     border-radius: 100px;
     display: block;
     width: fit-content;
     margin: 0 auto;
+    text-align: center;
+}
+
+.primary-button:hover {
+    background-color: #E9FCCE;
+    color: var(--green);
 }
 
 .bb-faq-section {
@@ -330,7 +344,7 @@ a {
 .survey {
     padding: 100px 0;
     background-color: #DAF4F4;
-    clip-path: ellipse(100% 100% at 50% 0%);
+    clip-path: ellipse(100% 100% at 50% 100%);
 }
 
 .survey h2 {
@@ -358,7 +372,7 @@ a {
 }
 
 .survey a {
-    background-color: var(--green);
+    background-color: #1C456B;
     display: block;
     padding: 8px 24px;
     width: fit-content;
@@ -367,14 +381,14 @@ a {
     line-height: 150%;
     letter-spacing: 0px;
     text-align: center;
-    color: var(--yellow);
+    color: #A7E3E3;
     border-radius: 50px;
     margin: 0 auto;
     font-weight: 700;
 }
 
 .survey a:hover {
-    color: var(--yellow);
+    color: #A7E3E3;
 }
 
 .bb-faq-title h2 {
@@ -447,6 +461,10 @@ a {
     font-size: 14px !important;
     font-weight: 400;
     font-family: 'GoFundMe';
+}
+.bb-circle-slider .bb-slider-context p {
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .bb-circle-slider .bb-slider-content .bb-border-view {

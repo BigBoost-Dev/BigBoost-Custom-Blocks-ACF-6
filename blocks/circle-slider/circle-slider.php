@@ -29,7 +29,7 @@ $section_items = get_field('field_circle_slider_items');
                                         <div>
                                             <div class="bb-circle-outline">
                                                 <svg class="progress-ring" viewBox="0 0 50 50">
-                                                    <circle class="progress-ring__circle" cx="25" cy="25" r="24"></circle>
+                                                    <circle class="progress-ring__circle" cx="25" cy="25" r="23"></circle>
                                                 </svg>
                                                 <span><?php echo esc_html($item['step_number']); ?></span>
                                             </div>
@@ -88,7 +88,7 @@ $section_items = get_field('field_circle_slider_items');
                                         <div>
                                             <div class="bb-circle-outline">
                                                 <svg class="progress-ring" viewBox="0 0 50 50">
-                                                    <circle class="progress-ring__circle" cx="25" cy="25" r="24"></circle>
+                                                    <circle class="progress-ring__circle" cx="25" cy="25" r="23"></circle>
                                                 </svg>
                                                 <span> <?php echo esc_html($item['step_number']); ?> </span>
                                             </div>
