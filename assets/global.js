@@ -1,9 +1,14 @@
 jQuery(function ($) {
 
     const DURATION = 7000; // ms – keep in sync with CSS & autoplay
-    const PROGRESS_RADIUS = 23;
-    const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_RADIUS;
-
+.bb-circle-slider .bb-circle-outline .progress-ring__circle {
+    stroke: var(--yellow);
+    stroke-width: 2;
+    fill: none;
+    /* 2 × π × 23 ≈ 144.51 – round to whole px to keep the rule readable */
+    stroke-dasharray: 145;
+    stroke-dashoffset: 145;
+}
     let height = $('.bb-slider-content').outerHeight();
     $('.bb-slider-images').height(height);
     let previousIndex = 0;
