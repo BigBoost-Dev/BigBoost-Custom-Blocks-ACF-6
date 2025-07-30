@@ -54,7 +54,17 @@ add_action( 'wp_enqueue_scripts', function () {
 } );
 
 add_action( 'wp_footer', function () {
-    echo '<a href="#" class="mobile-cta-button d-lg-none">' . esc_html__( 'Start a GoFundMe', 'bigboost' ) . '</a>';
+    $text = get_field( 'mobile_cta_text', 'option' );
+    $url  = get_field( 'mobile_cta_url', 'option' );
+
+    if ( $text && $url ) {
+        printf(
+            '<a href="%s" class="mobile-cta-button d-lg-none" aria-label="%s">%s</a>',
+            esc_url( $url ),
+            esc_attr( $text ),
+            esc_html( $text )
+        );
+    }
 } );
 
 // Preload fonts early to prevent layout shifts on FAQ toggle
@@ -126,6 +136,37 @@ add_filter( 'allowed_block_types_all', function ( $allowed, $ctx ) {
  # 5.  In‑code ACF field groups (same as before)
 --------------------------------------------------------------*/
 add_action( 'acf/init', function () {
+    if ( function_exists( 'acf_add_options_page' ) ) {
+        acf_add_options_page( [
+            'page_title' => 'Theme Settings',
+            'menu_title' => 'Theme Settings',
+            'menu_slug'  => 'theme-settings',
+            'capability' => 'edit_posts',
+            'redirect'   => false,
+        ] );
+
+        acf_add_local_field_group( [
+            'key'    => 'group_theme_settings',
+            'title'  => 'Theme Settings',
+            'fields' => [
+                [
+                    'key'           => 'field_mobile_cta_text',
+                    'label'         => 'Mobile CTA Text',
+                    'name'          => 'mobile_cta_text',
+                    'type'          => 'text',
+                    'default_value' => 'Start a GoFundMe',
+                ],
+                [
+                    'key'           => 'field_mobile_cta_url',
+                    'label'         => 'Mobile CTA URL',
+                    'name'          => 'mobile_cta_url',
+                    'type'          => 'url',
+                    'default_value' => 'https://www.gofundme.com/start',
+                ],
+            ],
+            'location' => [ [ [ 'param' => 'options_page', 'operator' => '==', 'value' => 'theme-settings' ] ] ],
+        ] );
+    }
     // Banner Section Block Fields
     acf_add_local_field_group( [
         'key'      => 'group_banner_section',
