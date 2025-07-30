@@ -138,28 +138,23 @@ jQuery(function ($) {
     // Initialize animation state
     let isAnimating = false;
 
-    function resetFaq() {
-        $('.bb-faq-description').stop(true, true).slideUp(200).removeClass('active');
-        $('.bb-faq-icon').each(function(){
-            $(this).attr('src', $(this).data('add'));
-        });
+
+$('.bb-downarrow').on('click', function (e) {
+    e.preventDefault();
+    const wrapper = $(this).closest('.d-flex.justify-content-between');
+    const desc = wrapper.next('.bb-faq-description');
+    const icon = $(this).find('.bb-faq-icon');
+
+    if (desc.hasClass('active')) {
+        desc.slideUp(200).removeClass('active');
+        icon.attr('src', icon.data('add'));
+    } else {
+        $('.bb-faq-description.active').not(desc).slideUp(200).removeClass('active');
+        $('.bb-faq-icon').not(icon).attr('src', function(){ return $(this).data('add'); });
+        desc.stop(true, true).slideDown(300).addClass('active');
+        icon.attr('src', icon.data('subtract'));
     }
-
-    $('.bb-downarrow').on('click', function (e) {
-        e.preventDefault();
-        const wrapper = $(this).closest('.d-flex.justify-content-between');
-        const desc = wrapper.next('.bb-faq-description');
-        const icon = $(this).find('.bb-faq-icon');
-
-        if (desc.hasClass('active')) {
-            resetFaq();
-        } else {
-            resetFaq();
-            desc.stop(true, true).slideDown(300).addClass('active');
-            icon.attr('src', icon.data('subtract'));
-        }
-    })
-
+});
     const sliderSection = $('.bb-circle-slider').first();
     if(sliderSection.length){
         const observer = new IntersectionObserver(function(entries){
