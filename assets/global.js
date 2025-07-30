@@ -146,10 +146,10 @@ $('.bb-downarrow').on('click', function (e) {
     const icon = $(this).find('.bb-faq-icon');
 
     if (desc.hasClass('active')) {
-        desc.slideUp(200).removeClass('active');
+        desc.stop(true, true).slideUp(200).removeClass('active');
         icon.attr('src', icon.data('add'));
     } else {
-        $('.bb-faq-description.active').not(desc).slideUp(200).removeClass('active');
+        $('.bb-faq-description.active').not(desc).stop(true, true).slideUp(200).removeClass('active');
         $('.bb-faq-icon').not(icon).attr('src', function(){ return $(this).data('add'); });
         desc.stop(true, true).slideDown(300).addClass('active');
         icon.attr('src', icon.data('subtract'));

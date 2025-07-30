@@ -290,7 +290,8 @@ a {
 .bb-faq-section>div>span {
     font-weight: 700;
     font-size: 28px;
-    font-family: 'GoFundMe';
+    font-family: 'GoFundMe', system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
 }
 
 .bb-faq-section .bb-faq-title {
@@ -313,14 +314,15 @@ a {
     color: var(--primary);
     font-weight: 700;
     font-size: 40px;
-    font-family: 'GoFundMe';
+    font-family: 'GoFundMe', system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.2;
 }
 
 .bb-faq-section .bb-faq-title p {
     font-weight: 400;
     font-size: 24px;
-    font-family: 'GoFundMe';
-    line-height: 150%;
+    font-family: 'GoFundMe', system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
     letter-spacing: 0px;
     color: var(--secondary);
 }
@@ -387,6 +389,21 @@ a {
 .bb-faq-title .bb-faq-description {
     display: none;
     color: #6F6F6F;
+    overflow: hidden;
+    contain: layout paint;
+    will-change: height;
+    font-family: 'GoFundMe', system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* Optional CSS-only toggle */
+.bb-faq-title .bb-faq-description.css-toggle {
+    display: block;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+}
+.bb-faq-title .bb-faq-description.css-toggle.active {
+    max-height: 1000px;
 }
 
 .bb-faq-title .bb-faq-description a {
