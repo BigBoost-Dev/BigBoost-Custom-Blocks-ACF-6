@@ -883,7 +883,7 @@ cite::before {
 @media (max-width: 768px) {
     .mobile-cta-button {
         position: fixed;
-        bottom: 0;
+        bottom: 1rem;
         left: 50%;
         transform: translateX(-50%);
         display: block;
@@ -896,5 +896,10 @@ cite::before {
         padding: 8px 0;
         text-align: center;
         z-index: 100;
+        border-radius: 100px;
+    }
+
+    .mobile-cta-button:hover {
+        color: var(--white);
     }
 }
