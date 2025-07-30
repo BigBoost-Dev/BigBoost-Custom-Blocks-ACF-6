@@ -843,7 +843,7 @@ a {
   width: 18px;   /* size of your end.png */
   height: 32px;
   background: url('https://www.gfm-test01.com/c/wp-content/uploads/2025/07/end.png') no-repeat center/contain;
-  transform: translate(-1160%,-180%);  /* nudge below the box */
+  transform: translate(-950%,-180%);  /* nudge below the box */
 }
 
 /* 4) Author styling */
