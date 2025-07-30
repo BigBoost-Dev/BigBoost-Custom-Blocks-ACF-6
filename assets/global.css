@@ -470,8 +470,8 @@ a {
     stroke: var(--yellow);
     stroke-width: 2;
     fill: none;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
 }
 
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-circle-outline span {
@@ -542,8 +542,8 @@ a {
     position: absolute;
     bottom: 24px;
     left: -130px;
-    transition: transform 0.5s ease;
-    transition-delay: 0.2s;
+    /* property | duration | easing | delay */
+    transition: transform 0.5s ease 0.5s;
     transform: translate(0,0) scale(1);
 }
 
