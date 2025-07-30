@@ -890,7 +890,7 @@ cite::before {
         width: calc(100% - 2rem);
         max-width: 344px;
         background-color: #0B291A;
-        color: var(--white);
+        color: #CCF88E;
         font-weight: 800;
         font-size: 16px;
         padding: 8px 0;
