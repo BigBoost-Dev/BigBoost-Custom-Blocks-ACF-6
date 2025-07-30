@@ -1,0 +1,15 @@
+{
+  "name": "acf/floating-cta",
+  "title": "Floating CTA",
+  "description": "Displays a sticky call-to-action button on mobile screens.",
+  "category": "bigboost-blocks",
+  "icon": "megaphone",
+  "keywords": ["cta", "floating"],
+  "acf": {
+    "mode": "edit",
+    "supports": {
+      "mode": false
+    },
+    "renderTemplate": "floating-cta.php"
+  }
+}

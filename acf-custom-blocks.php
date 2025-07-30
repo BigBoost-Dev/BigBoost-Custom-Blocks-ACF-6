@@ -53,19 +53,6 @@ add_action( 'wp_enqueue_scripts', function () {
         }
 } );
 
-add_action( 'wp_footer', function () {
-    $text = get_field( 'mobile_cta_text', 'option' );
-    $url  = get_field( 'mobile_cta_url', 'option' );
-
-    if ( $text && $url ) {
-        printf(
-            '<a href="%s" class="mobile-cta-button d-lg-none" aria-label="%s">%s</a>',
-            esc_url( $url ),
-            esc_attr( $text ),
-            esc_html( $text )
-        );
-    }
-} );
 
 // Preload fonts early to prevent layout shifts on FAQ toggle
 add_action( 'wp_head', function () {
@@ -118,8 +105,9 @@ add_filter( 'allowed_block_types_all', function ( $allowed, $ctx ) {
 	$custom = [
 		'acf/banner-section',
 		'acf/quote-section',
-		'acf/call-to-action',
-		'acf/gallery',
+                'acf/call-to-action',
+                'acf/floating-cta',
+                'acf/gallery',
 		'acf/faq',
         'acf/circle-slider',
 	];
@@ -145,27 +133,8 @@ add_action( 'acf/init', function () {
             'redirect'   => false,
         ] );
 
-        acf_add_local_field_group( [
-            'key'    => 'group_theme_settings',
-            'title'  => 'Theme Settings',
-            'fields' => [
-                [
-                    'key'           => 'field_mobile_cta_text',
-                    'label'         => 'Mobile CTA Text',
-                    'name'          => 'mobile_cta_text',
-                    'type'          => 'text',
-                    'default_value' => 'Start a GoFundMe',
-                ],
-                [
-                    'key'           => 'field_mobile_cta_url',
-                    'label'         => 'Mobile CTA URL',
-                    'name'          => 'mobile_cta_url',
-                    'type'          => 'url',
-                    'default_value' => home_url( '/create/fundraiser/category' ),
-                ],
-            ],
-            'location' => [ [ [ 'param' => 'options_page', 'operator' => '==', 'value' => 'theme-settings' ] ] ],
-        ] );
+        // Previously contained mobile CTA fields which were rendered globally.
+        // The floating CTA is now provided as a block, so this group is no longer needed.
     }
     // Banner Section Block Fields
     acf_add_local_field_group( [
@@ -221,16 +190,27 @@ add_action( 'acf/init', function () {
 	] );
 
 	// Call‑to‑Action
-	acf_add_local_field_group( [
-		'key'    => 'group_call_to_action',
-		'title'  => 'Call to Action Block',
-		'fields' => [
-			[ 'key' => 'field_cta_title',       'label' => 'CTA Title',       'name' => 'cta_title',       'type' => 'text'     ],
-			[ 'key' => 'field_cta_description', 'label' => 'CTA Description', 'name' => 'cta_description', 'type' => 'textarea' ],
-			[ 'key' => 'field_cta_button',      'label' => 'CTA Button',      'name' => 'cta_button',      'type' => 'link'     ],
-		],
-		'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/call-to-action' ] ] ],
-	] );
+        acf_add_local_field_group( [
+                'key'    => 'group_call_to_action',
+                'title'  => 'Call to Action Block',
+                'fields' => [
+                        [ 'key' => 'field_cta_title',       'label' => 'CTA Title',       'name' => 'cta_title',       'type' => 'text'     ],
+                        [ 'key' => 'field_cta_description', 'label' => 'CTA Description', 'name' => 'cta_description', 'type' => 'textarea' ],
+                        [ 'key' => 'field_cta_button',      'label' => 'CTA Button',      'name' => 'cta_button',      'type' => 'link'     ],
+                ],
+                'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/call-to-action' ] ] ],
+        ] );
+
+        // Floating CTA
+        acf_add_local_field_group( [
+                'key'    => 'group_floating_cta',
+                'title'  => 'Floating CTA Block',
+                'fields' => [
+                        [ 'key' => 'field_floating_cta_text', 'label' => 'Button Text', 'name' => 'cta_text', 'type' => 'text' ],
+                        [ 'key' => 'field_floating_cta_url',  'label' => 'Button URL',  'name' => 'cta_url',  'type' => 'url'  ],
+                ],
+                'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/floating-cta' ] ] ],
+        ] );
 
 	// Gallery
 	acf_add_local_field_group( [
