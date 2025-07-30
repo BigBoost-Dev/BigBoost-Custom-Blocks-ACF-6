@@ -883,7 +883,7 @@ cite::before {
 @media (max-width: 768px) {
     .mobile-cta-button {
         position: fixed;
-        bottom: 1rem;
+        bottom: calc(1rem + env(safe-area-inset-bottom));
         left: 50%;
         transform: translateX(-50%);
         display: block;
