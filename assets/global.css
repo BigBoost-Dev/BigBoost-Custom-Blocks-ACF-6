@@ -899,7 +899,5 @@ cite::before {
         border-radius: 100px;
     }
 
-    .mobile-cta-button:hover {
-        color: var(--white);
-    }
+   
 }
