@@ -3,6 +3,34 @@ jQuery(function ($) {
     let height = $('.bb-slider-content').outerHeight();
     $('.bb-slider-images').height(height);
     let previousIndex = 0;
+    let autoInterval;
+
+    function startProgress(index) {
+        const circles = $('.bb-circle-outline .progress-ring__circle');
+        circles.css({'transition':'none','stroke-dashoffset':100});
+        const circle = circles.eq(index);
+        if(circle.length){
+            circle[0].getBoundingClientRect();
+            circle.css({'transition':'stroke-dashoffset 5s linear','stroke-dashoffset':0});
+        }
+    }
+
+    function startAuto() {
+        if(autoInterval) return;
+        startProgress(previousIndex);
+        autoInterval = setInterval(function(){
+            const actions = $('.bb-slider-actions');
+            if(actions.length){
+                let next = (previousIndex + 1) % actions.length;
+                $(actions[next]).trigger('click');
+            }
+        },5000);
+    }
+
+    function stopAuto(){
+        clearInterval(autoInterval);
+        autoInterval = null;
+    }
 
     $('.bb-slider-actions').on('click', function (e) {
         e.preventDefault();
@@ -65,6 +93,7 @@ jQuery(function ($) {
                     $('.bb-slider-description').slideUp(300);
                     $($('.bb-slider-actions')[target]).closest('div').find('.bb-slider-description').slideToggle(300);
                     isAnimating = false;
+                    startProgress(target);
                     return;
                 }
                 const isForward = current < target;
@@ -111,4 +140,18 @@ jQuery(function ($) {
         }
 
     })
+
+    const sliderSection = $('.bb-circle-slider').first();
+    if(sliderSection.length){
+        const observer = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    startAuto();
+                } else {
+                    stopAuto();
+                }
+            });
+        }, {threshold:0.5});
+        observer.observe(sliderSection[0]);
+    }
 })
