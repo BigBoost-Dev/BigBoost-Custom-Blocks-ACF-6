@@ -42,16 +42,24 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	// Plugin JS
 	$js = plugin_dir_path( __FILE__ ) . 'assets/global.js';
-	if ( file_exists( $js ) ) {
-		wp_enqueue_script(
-			'bigboost-global',
-			plugin_dir_url( __FILE__ ) . 'assets/global.js',
-			[ 'jquery' ],
-			filemtime( $js ),
-			true
-		);
-	}
+        if ( file_exists( $js ) ) {
+                wp_enqueue_script(
+                        'bigboost-global',
+                        plugin_dir_url( __FILE__ ) . 'assets/global.js',
+                        [ 'jquery' ],
+                        filemtime( $js ),
+                        true
+                );
+        }
 } );
+
+// Preload fonts early to prevent layout shifts on FAQ toggle
+add_action( 'wp_head', function () {
+        $font_url = plugin_dir_url( __FILE__ ) . 'assets/fonts/';
+        echo '<link rel="preload" href="' . esc_url( $font_url . 'GoFundMeSans-Regular.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+        echo '<link rel="preload" href="' . esc_url( $font_url . 'GoFundMeSans-Medium.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+        echo '<link rel="preload" href="' . esc_url( $font_url . 'GoFundMeSans-Bold.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+}, 1 );
 
 /*--------------------------------------------------------------
  # 2.  ACF JSON sync
