@@ -11,7 +11,7 @@ jQuery(function ($) {
         const circle = circles.eq(index);
         if(circle.length){
             circle[0].getBoundingClientRect();
-            circle.css({'transition':'stroke-dashoffset 5s linear','stroke-dashoffset':0});
+            circle.css({'transition':'stroke-dashoffset 7s linear','stroke-dashoffset':0});
         }
     }
 
@@ -24,7 +24,7 @@ jQuery(function ($) {
                 let next = (previousIndex + 1) % actions.length;
                 $(actions[next]).trigger('click');
             }
-        },5000);
+        },7000);
     }
 
     function stopAuto(){

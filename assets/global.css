@@ -543,7 +543,7 @@ a {
     bottom: 24px;
     left: -130px;
     transition: transform 0.5s ease;
-    transition-delay: 0.2s;
+    transition-delay: 0.5s;
     transform: translate(0,0) scale(1);
 }
 
