@@ -907,6 +907,14 @@ blockquote{
 cite::before {
   display: none;
 }
+.quotes-section p
+	 {
+        width: 100%;
+        font-size: 26px;
+		 padding-bottom:20px;
+         font-family:'GoFundMe Sans';
+         font-weight:300;
+    }
 
 @media (max-width: 768px) {
     .mobile-cta-container {
@@ -959,11 +967,3 @@ cite::before {
   display: none !important;
 }
 }
-    .quotes-section p
-	 {
-        width: 100%;
-        font-size: 26px !important;
-		 padding-bottom:20px !important;
-         font-family:'GoFundMe Sans';
-         font-weight:300;
-    }
