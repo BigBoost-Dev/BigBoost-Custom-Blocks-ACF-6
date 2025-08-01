@@ -1,6 +1,9 @@
 // Shared constants for circle progress animations
 const PROGRESS_RADIUS = 24;
 const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_RADIUS;
+// Expose constants globally for scripts outside this file
+window.PROGRESS_RADIUS = PROGRESS_RADIUS;
+window.PROGRESS_CIRCUMFERENCE = PROGRESS_CIRCUMFERENCE;
 
 jQuery(function ($) {
 
