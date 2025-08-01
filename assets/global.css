@@ -275,14 +275,7 @@ a {
     text-align: center;
 }
 
-.quotes-section p {
-    font-size: 18px !important;
-    width: 80%;
-    margin: 0 auto;
-    padding-bottom: 20px;
-    font-family:'GoFundMe Sans';
-         font-weight:300;
-}
+
 
 .quotes-section p.quote-line {
     display: flex;
