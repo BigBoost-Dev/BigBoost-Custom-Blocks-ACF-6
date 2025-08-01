@@ -821,6 +821,8 @@ a {
 
 /* typography within the blockquote */
 .quote-line p {
+    font-size: inherit;
+  font-family: 'GoFundMe';
   margin: 0 0 1em;  /* space paragraphs if your WYSIWYG has more than one */
 }
 
@@ -953,4 +955,13 @@ cite::before {
     .progress-ring {
         display: none;
     }
+}
+.quotes-section .quote-line p {
+  font-size: 26px;
+}
+
+@media (max-width: 480px) {
+  .quotes-section .quote-line p {
+    font-size: 18px;
+  }
 }
