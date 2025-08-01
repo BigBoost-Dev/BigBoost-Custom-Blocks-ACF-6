@@ -913,7 +913,7 @@ cite::before {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .mobile-cta-container {
         position: fixed;
         bottom: 0;
