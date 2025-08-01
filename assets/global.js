@@ -1,8 +1,10 @@
+// Shared constants for circle progress animations
+const PROGRESS_RADIUS = 24;
+const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_RADIUS;
+
 jQuery(function ($) {
 
     const DURATION = 7000; // ms – keep in sync with CSS & autoplay
-    const PROGRESS_RADIUS = 24;
-    const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_RADIUS;
     let height = $('.bb-slider-content').outerHeight();
     $('.bb-slider-images').height(height);
     let previousIndex = 0;
