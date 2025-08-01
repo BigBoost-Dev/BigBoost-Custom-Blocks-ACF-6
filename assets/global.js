@@ -168,3 +168,43 @@ $('.bb-downarrow').on('click', function (e) {
         observer.observe(sliderSection[0]);
     }
 })
+
+function insertProgressRing(targetEl, percent) {
+  const svgNS = "http://www.w3.org/2000/svg";
+  const radius = 23;
+  const circumference = 2 * Math.PI * radius;
+
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("class", "progress-ring");
+  svg.setAttribute("width", "50");
+  svg.setAttribute("height", "50");
+
+  const bg = document.createElementNS(svgNS, "circle");
+  bg.setAttribute("class", "progress-ring__background");
+  bg.setAttribute("cx", "25");
+  bg.setAttribute("cy", "25");
+  bg.setAttribute("r", radius);
+  svg.appendChild(bg);
+
+  const fg = document.createElementNS(svgNS, "circle");
+  fg.setAttribute("class", "progress-ring__circle");
+  fg.setAttribute("cx", "25");
+  fg.setAttribute("cy", "25");
+  fg.setAttribute("r", radius);
+  fg.style.strokeDasharray = `${circumference}`;
+  fg.style.strokeDashoffset = `${circumference}`;
+  svg.appendChild(fg);
+
+  targetEl.appendChild(svg);
+
+  // Animate
+  setTimeout(() => {
+    const offset = circumference - (percent / 100) * circumference;
+    fg.style.transition = "stroke-dashoffset 1s ease";
+    fg.style.strokeDashoffset = offset;
+  }, 50);
+}
+
+document.querySelectorAll('.bb-circle-outline').forEach(el => {
+  insertProgressRing(el, 70); // Set to your actual percentage
+});
