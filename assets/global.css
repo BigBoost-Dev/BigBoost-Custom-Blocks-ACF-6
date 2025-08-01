@@ -333,7 +333,7 @@ a {
 }
 
 .bb-faq-section .bb-faq-title>div>div:first-child {
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .bb-faq-section .bb-faq-title h2 {
@@ -342,6 +342,7 @@ a {
     font-size: 40px !important;
     font-family: 'GoFundMe', system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.2;
+    margin-bottom: 0;
 }
 
 .bb-faq-section .bb-faq-title p {
@@ -405,6 +406,7 @@ a {
 
 .bb-faq-title h2 {
     color: #333333 !important;
+    margin-bottom: 0;
 }
 
 .bb-faq-title h2 a {
@@ -500,8 +502,8 @@ a {
 
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-circle-outline {
     border: 2px solid var(--white);
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     font-size: 18px;
     font-family: 'GoFundMe';
@@ -518,11 +520,11 @@ a {
 }
 
 .bb-circle-slider .bb-slider-content .bb-circle-outline .progress-ring__circle {
-    stroke: var(--yellow);
+    stroke: var(--green);
     stroke-width: 2;
     fill: none;
-    stroke-dasharray: 151;
-    stroke-dashoffset: 151;
+    stroke-dasharray: 160.22;
+    stroke-dashoffset: 160.22;
 }
 
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-circle-outline span {
@@ -539,8 +541,8 @@ a {
 
 @media (max-width: 992px) {
     .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-circle-outline {
-        width: 32px;
-        height: 32px;
+        width: 34px;
+        height: 34px;
     }
 }
 
