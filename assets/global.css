@@ -474,6 +474,9 @@ a {
         max-width: 100%;
         height: auto;
     }
+    .progress-ring {
+  display: none;
+}
 }
 
 .bb-circle-slider .bb-slider-content * {
@@ -537,8 +540,8 @@ a {
 }
 
 .bb-circle-slider .bb-slider-content .bb-circle-outline .progress-ring__circle {
-    stroke: var(--green);
-    stroke-width: 4;
+    stroke: var(--yellow);
+    stroke-width: 3;
     fill: none;
     stroke-dasharray: 150.8;
     stroke-dashoffset: 150.8;
@@ -949,6 +952,12 @@ cite::before {
    .quote-line {
         padding: 2rem 1.5rem;  
         }
+        .progress-ring {
+        display: none;
+        }
+        .progress-ring {
+  display: none !important;
+}
 }
     .quotes-section p
 	 {
