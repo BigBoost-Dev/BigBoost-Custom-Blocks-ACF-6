@@ -170,9 +170,8 @@ $('.bb-downarrow').on('click', function (e) {
 })
 
 function insertProgressRing(targetEl, percent) {
-  if (!targetEl || !(targetEl instanceof Element)) {
-    console.error('insertProgressRing: invalid target element', targetEl);
-    return;
+  if (!(targetEl instanceof Element)) {
+    throw new Error('insertProgressRing: targetEl must be a DOM element');
   }
   const svgNS = "http://www.w3.org/2000/svg";
   const radius = PROGRESS_RADIUS;
