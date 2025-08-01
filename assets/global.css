@@ -645,7 +645,7 @@ a {
     width: 90%;
 }
 .bb-slider-images {
-  height: 1010px;
+  height: 1010px !important;
 }
 
 
