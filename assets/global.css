@@ -7,6 +7,21 @@
     font-display: swap;
 }
 
+.progress-ring {
+  transform: rotate(-90deg);
+}
+.progress-ring__background {
+  stroke: #e6e6e6;
+  fill: transparent;
+  stroke-width: 2;
+}
+.progress-ring__circle {
+  stroke: #3BD671;
+  fill: transparent;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
 @font-face {
     font-family: 'GoFundMe';
     src: url('./fonts/GoFundMeSans-Medium.woff2') format('woff2');
