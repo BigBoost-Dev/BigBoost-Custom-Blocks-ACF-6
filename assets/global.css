@@ -945,25 +945,22 @@ cite::before {
      }
     .bb-faq-section .bb-faq-title h2 {
         font-size: 28px !important;
-  font-family: 'GoFundMe',system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+        font-family: 'GoFundMe',system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     }
     .survey {
         clip-path: ellipse(150% 100% at 50% 100%) !important;
     }
     .quotes-section p
 	 {
-        font-size: 18px !important;
-		 padding-bottom:20px !important;
+        font-size: 18px;
+		 padding-bottom:20px;
          font-family:'GoFundMe Sans';
          font-weight:300;
     }
    .quote-line {
         padding: 2rem 1.5rem;  
-        }
-        .progress-ring {
+    }
+    .progress-ring {
         display: none;
-        }
-        .progress-ring {
-  display: none !important;
-}
+    }
 }
