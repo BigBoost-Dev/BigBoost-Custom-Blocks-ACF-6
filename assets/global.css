@@ -965,3 +965,25 @@ cite::before {
     font-size: 18px;
   }
 }
+
+.quotes-section p.quote-desktop {
+  display: block;
+  font-size: 26px;
+  font-weight: 300;
+}
+
+.quotes-section p.quote-mobile {
+  display: none;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+@media (max-width: 480px) {
+  .quotes-section p.quote-desktop {
+    display: none;
+  }
+
+  .quotes-section p.quote-mobile {
+    display: block;
+  }
+}
