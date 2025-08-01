@@ -16,8 +16,8 @@
       </div>
       <div class="col-12 col-md-6 quotes-blocks">
         <blockquote class="quote-line">
-          <p class="quote-desktop"><?php echo esc_html($quote); ?></p>
-          <p class="quote-mobile"><?php echo esc_html($quote); ?></p>
+          <p class="quote-desktop"><?php echo wp_kses_post($quote); ?></p>
+          <p class="quote-mobile"><?php echo wp_kses_post($quote); ?></p>
         </blockquote>
         <cite class="quote-author">
          <?php echo esc_html($author); ?>
