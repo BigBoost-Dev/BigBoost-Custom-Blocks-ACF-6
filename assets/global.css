@@ -280,6 +280,8 @@ a {
     width: 80%;
     margin: 0 auto;
     padding-bottom: 20px;
+    font-family:'GoFundMe Sans';
+         font-weight:light;
 }
 
 .quotes-section p.quote-line {
@@ -335,7 +337,7 @@ a {
 }
 
 .bb-faq-section .bb-faq-title {
-    margin-top: 64px;
+    margin-top: 20px;
 }
 
 .bb-faq-section .bb-faq-title>div {
@@ -639,6 +641,10 @@ a {
     transform: rotate(-28deg);
     width: 90%;
 }
+.bb-slider-images {
+  height: 1010px;
+}
+
 
 .bb-circle-slider .bb-slider-images .bb-slider-item.previous {
     top: -65%;
@@ -751,14 +757,6 @@ a {
 
     .quotes-section span {
         font-size: 22px;
-    }
-    .quotes-section p
-	 {
-        width: 100%;
-        font-size: 26px !important;
-		 padding-bottom:20px !important;
-         font-family:'GoFundMe Sans';
-         font-weight:light;
     }
     .bb-faq-section>div>span {
         color: #232323;
@@ -937,3 +935,11 @@ cite::before {
     }
    
 }
+    .quotes-section p
+	 {
+        width: 100%;
+        font-size: 26px !important;
+		 padding-bottom:20px !important;
+         font-family:'GoFundMe Sans';
+         font-weight:light;
+    }
