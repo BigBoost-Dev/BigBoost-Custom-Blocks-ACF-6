@@ -521,10 +521,10 @@ a {
 
 .bb-circle-slider .bb-slider-content .bb-circle-outline .progress-ring__circle {
     stroke: var(--green);
-    stroke-width: 2;
+    stroke-width: 4;
     fill: none;
-    stroke-dasharray: 160.22;
-    stroke-dashoffset: 160.22;
+    stroke-dasharray: 150.8;
+    stroke-dashoffset: 150.8;
 }
 
 .bb-circle-slider .bb-slider-content .bb-slider-context>div .bb-circle-outline span {
