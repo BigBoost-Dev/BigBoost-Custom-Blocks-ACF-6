@@ -903,15 +903,11 @@ cite::before {
 .quotes-section p
 	 {
         width: 100%;
+        font-size: 26px;
 		 padding-bottom:20px;
-         font-family:'GoFundMe Sans';
          font-weight:300;
     }
-@media (min-width: 769px) {
-    .quotes-section p {
-        font-size: 26px;
-    }
-}
+
 
 @media (max-width: 480px) {
     .mobile-cta-container {
@@ -950,9 +946,6 @@ cite::before {
     .quotes-section p
 	 {
         font-size: 18px;
-		 padding-bottom:20px;
-         font-family:'GoFundMe Sans';
-         font-weight:300;
     }
    .quote-line {
         padding: 2rem 1.5rem;  
