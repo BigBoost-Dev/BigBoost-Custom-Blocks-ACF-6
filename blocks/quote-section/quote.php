@@ -16,7 +16,8 @@
       </div>
       <div class="col-12 col-md-6 quotes-blocks">
         <blockquote class="quote-line">
-          <?php echo apply_filters('the_content', $quote); ?>
+          <p class="quote-desktop"><?php echo esc_html($quote); ?></p>
+          <p class="quote-mobile"><?php echo esc_html($quote); ?></p>
         </blockquote>
         <cite class="quote-author">
          <?php echo esc_html($author); ?>
