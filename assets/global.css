@@ -281,7 +281,7 @@ a {
     margin: 0 auto;
     padding-bottom: 20px;
     font-family:'GoFundMe Sans';
-         font-weight:light;
+         font-weight:300;
 }
 
 .quotes-section p.quote-line {
@@ -841,7 +841,6 @@ a {
 .quote-line {
   position: relative;
   margin: 0;               /* remove default margins */
-  padding: 2rem 1.5rem;     /* space for text and quote icons */
   font-style: normal;       /* make sure it’s not italic */
   line-height: 1.5;
   color: #232323;
@@ -913,7 +912,7 @@ cite::before {
         left: 0;
         width: 100%;
         background-color: var(--white);
-        padding: 8px;
+        padding: 20px 8px;
         z-index: 100;
     }
     .mobile-cta-button {
@@ -925,7 +924,14 @@ cite::before {
         font-size: 16px;
         padding: 8px 0;
         text-align: center;
+        border-radius:100px;
+        width: 344px;
+        margin: 0 auto;
     }
+    }
+     .mobile-cta-button a:hover{
+        color: #ccf88e;
+     }
     .bb-faq-section .bb-faq-title h2 {
         font-size: 28px !important;
   font-family: 'GoFundMe',system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -933,7 +939,16 @@ cite::before {
     .survey {
         clip-path: ellipse(150% 100% at 50% 100%) !important;
     }
-   
+    .quotes-section p
+	 {
+        font-size: 18px !important;
+		 padding-bottom:20px !important;
+         font-family:'GoFundMe Sans';
+         font-weight:300;
+    }
+   .quote-line {
+        padding: 2rem 1.5rem;  
+        }
 }
     .quotes-section p
 	 {
@@ -941,5 +956,5 @@ cite::before {
         font-size: 26px !important;
 		 padding-bottom:20px !important;
          font-family:'GoFundMe Sans';
-         font-weight:light;
+         font-weight:300;
     }
