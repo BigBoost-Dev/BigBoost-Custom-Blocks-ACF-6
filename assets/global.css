@@ -785,7 +785,7 @@ a {
     
 }
 /* container resets */
-.quote‑line {
+.quote-line {
   position: relative;
   margin: 0;               /* reset default blockquote margins if any */
   padding: 1.5rem 2rem;     /* give room for the quote marks */
@@ -796,7 +796,7 @@ a {
 }
 
 /* start‑quote at top‑left */
-.quote‑line::before {
+.quote-line::before {
   content: "";
   position: absolute;
   top: 0;
@@ -808,7 +808,7 @@ a {
 }
 
 /* end‑quote at bottom‑right */
-.quote‑line::after {
+.quote-line::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -820,12 +820,12 @@ a {
 }
 
 /* typography within the blockquote */
-.quote‑line p {
+.quote-line p {
   margin: 0 0 1em;  /* space paragraphs if your WYSIWYG has more than one */
 }
 
 /* author styling */
-.quote‑author {
+.quote-author {
   display: block;
   margin-top: 1rem;
   font-weight: 700;
