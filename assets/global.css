@@ -634,13 +634,14 @@ a {
 }
 
 .bb-circle-slider .bb-slider-images .bb-slider-item.next {
-    top: 67%;
-    left: 160px;
+    top: 60%;
+    left: 190px;
     transform: rotate(-28deg);
+    width: 90%;
 }
 
 .bb-circle-slider .bb-slider-images .bb-slider-item.previous {
-    top: -68%;
+    top: -65%;
     left: 160px;
     transform: rotate(28deg);
 }
@@ -754,8 +755,10 @@ a {
     .quotes-section p
 	 {
         width: 100%;
-        font-size: 18px !important;
+        font-size: 26px !important;
 		 padding-bottom:20px !important;
+         font-family:'GoFundMe Sans';
+         font-weight:light;
     }
     .bb-faq-section>div>span {
         color: #232323;
@@ -855,7 +858,7 @@ a {
   width: 18px;   /* size of your start.png */
   height: 32px;
   background: url('https://www.gfm-test01.com/c/wp-content/uploads/2025/07/start.png') no-repeat center/contain;
-  transform: translate(375%,65%);  /* nudge above the box */
+  transform: translate(125%,15%);  /* nudge above the box */
 }
 
 /* 3) Closing quote via ::after */
@@ -868,6 +871,7 @@ a {
   height: 32px;
   background: url('https://www.gfm-test01.com/c/wp-content/uploads/2025/07/end.png') no-repeat center/contain;
   transform: translate(-950%,-180%);  /* nudge below the box */
+  display:none !important;
 }
 
 /* 4) Author styling */
@@ -928,6 +932,12 @@ cite::before {
         text-align: center;
         border-radius: 100px;
     }
-
+    .bb-faq-section .bb-faq-title h2 {
+        font-size: 28px !important;
+  font-family: 'GoFundMe',system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    .survey {
+        clip-path: ellipse(150% 100% at 50% 100%) !important;
+    }
    
 }
