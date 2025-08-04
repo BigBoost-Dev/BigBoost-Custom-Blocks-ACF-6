@@ -102,15 +102,16 @@ add_filter( 'allowed_block_types_all', function ( $allowed, $ctx ) {
 		return $allowed;
 	}
 
-	$custom = [
-		'acf/banner-section',
-		'acf/quote-section',
+        $custom = [
+                'acf/banner-section',
+                'acf/quote-section',
                 'acf/call-to-action',
                 'acf/floating-cta',
                 'acf/gallery',
-		'acf/faq',
-        'acf/circle-slider',
-	];
+                'acf/faq',
+                'acf/circle-slider',
+                'acf/giving-funds-cta',
+        ];
 
 	if ( ! is_array( $allowed ) ) {
 		return true;
@@ -315,6 +316,27 @@ add_action( 'acf/init', function () {
                 ),
             ),
         ));
+
+        // Giving Funds CTA Block
+        acf_add_local_field_group( [
+                'key'    => 'group_giving_funds_cta',
+                'title'  => 'Giving Funds CTA Block',
+                'fields' => [
+                        [ 'key' => 'field_giving_funds_subtitle',    'label' => 'Subtitle',    'name' => 'giving_funds_subtitle',    'type' => 'text' ],
+                        [ 'key' => 'field_giving_funds_title',       'label' => 'Title',       'name' => 'giving_funds_title',       'type' => 'text' ],
+                        [ 'key' => 'field_giving_funds_description', 'label' => 'Description', 'name' => 'giving_funds_description', 'type' => 'textarea' ],
+                        [ 'key' => 'field_giving_funds_button',      'label' => 'Button',      'name' => 'giving_funds_button',      'type' => 'link' ],
+                        [
+                                'key'          => 'field_giving_funds_image',
+                                'label'        => 'Image',
+                                'name'         => 'giving_funds_image',
+                                'type'         => 'image',
+                                'return_format'=> 'array',
+                                'preview_size' => 'thumbnail',
+                        ],
+                ],
+                'location' => [ [ [ 'param' => 'block', 'operator' => '==', 'value' => 'acf/giving-funds-cta' ] ] ],
+        ] );
 
 
 
