@@ -179,40 +179,35 @@ function insertProgressRing(targetEl, percent) {
   if (!(targetEl instanceof Element)) {
     throw new Error('insertProgressRing: targetEl must be a DOM element');
   }
+
   const svgNS = "http://www.w3.org/2000/svg";
   const radius = PROGRESS_RADIUS;
   const circumference = PROGRESS_CIRCUMFERENCE;
 
   const svg = document.createElementNS(svgNS, "svg");
   svg.setAttribute("class", "progress-ring");
-  svg.setAttribute("width", "50");
-  svg.setAttribute("height", "50");
-
-  const bg = document.createElementNS(svgNS, "circle");
-  bg.setAttribute("class", "progress-ring__background");
-  bg.setAttribute("cx", "25");
-  bg.setAttribute("cy", "25");
-  bg.setAttribute("r", radius);
-  svg.appendChild(bg);
+  svg.setAttribute("width", "52");
+  svg.setAttribute("height", "52");
 
   const fg = document.createElementNS(svgNS, "circle");
   fg.setAttribute("class", "progress-ring__circle");
-  fg.setAttribute("cx", "25");
-  fg.setAttribute("cy", "25");
+  fg.setAttribute("cx", "26");
+  fg.setAttribute("cy", "26");
   fg.setAttribute("r", radius);
   fg.style.strokeDasharray = `${circumference}`;
   fg.style.strokeDashoffset = `${circumference}`;
-  svg.appendChild(fg);
 
+  svg.appendChild(fg);
   targetEl.appendChild(svg);
 
   // Animate
   setTimeout(() => {
     const offset = circumference - (percent / 100) * circumference;
     fg.style.transition = "stroke-dashoffset 1s ease";
-    fg.style.strokeDashoffset = offset;
+    fg.style.stroke-dashoffset = offset;
   }, 50);
 }
+
 
 document.querySelectorAll('.bb-circle-outline').forEach(el => {
   insertProgressRing(el, 70); // Set to your actual percentage
