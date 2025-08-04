@@ -1,0 +1,15 @@
+{
+  "name": "acf/giving-funds-cta",
+  "title": "Giving Funds CTA",
+  "description": "Call to action with text and image for Giving Funds.",
+  "category": "bigboost-blocks",
+  "icon": "megaphone",
+  "keywords": ["giving", "funds", "cta"],
+  "acf": {
+    "mode": "edit",
+    "supports": {
+      "mode": false
+    },
+    "renderTemplate": "giving-funds-cta.php"
+  }
+}
