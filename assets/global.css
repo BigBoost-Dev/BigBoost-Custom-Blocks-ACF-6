@@ -984,20 +984,28 @@ cite::before {
   position: relative;
   width: 52px;
   height: 52px;
+  border: 2px solid white;
   border-radius: 50%;
-  border: 2px solid white; /* static white ring */
-  overflow: hidden;
+  font-size: 18px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
 }
 
+.progress-ring__circle {
+  fill: none;
+  stroke: #B4FF9F;
+  stroke-width: 1.5;
+  transform: rotate(-90deg); /* animate from top */
+  transform-origin: center;
+}
+
+
 .bb-circle-outline span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -56%);
+  position: relative;
   z-index: 2;
-  color: white;
-  font-family: 'GoFundMe';
-  font-size: 18px;
 }
 
 .progress-ring {
@@ -1006,16 +1014,7 @@ cite::before {
   left: 0;
   width: 52px;
   height: 52px;
-  transform: rotate(-90deg);
   z-index: 1;
   pointer-events: none;
 }
 
-.progress-ring__circle {
-  fill: none;
-  stroke: #3BD671;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 147.5;
-  stroke-dashoffset: 147.5;
-}

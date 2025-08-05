@@ -1,5 +1,5 @@
 // Shared constants for circle progress animations
-const PROGRESS_RADIUS = 23.5; // was 24
+const PROGRESS_RADIUS = 25.5; // was 24
 const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_RADIUS;
 
 // Expose constants globally for scripts outside this file
@@ -18,8 +18,14 @@ function insertProgressRing(targetEl, percent) {
 
   const svg = document.createElementNS(svgNS, "svg");
   svg.setAttribute("class", "progress-ring");
-  svg.setAttribute("width", "52");
-  svg.setAttribute("height", "52");
+    svg.setAttribute("width", "52");
+    svg.setAttribute("height", "52");
+    svg.setAttribute("viewBox", "0 0 52 52"); // <-- important!
+    svg.style.position = "absolute";
+    svg.style.top = "0";
+    svg.style.left = "0";
+    svg.style.zIndex = "1";
+
 
   const fg = document.createElementNS(svgNS, "circle");
   fg.setAttribute("class", "progress-ring__circle");
@@ -49,7 +55,9 @@ jQuery(function ($) {
     insertProgressRing(el, 70); // or set dynamic %
   });
 
-  const DURATION = 7000; // ms – keep in sync with CSS & autoplay
+const DURATION = 7000; // animation
+const INTERVAL_DELAY = DURATION + 300; // 7.3s total cycle
+
   let height = $('.bb-slider-content').outerHeight();
   $('.bb-slider-images').height(height);
   let previousIndex = 0;
@@ -57,21 +65,27 @@ jQuery(function ($) {
   let isAnimating = false;
 
   function startProgress(index) {
-    const circles = $('.bb-circle-outline .progress-ring__circle');
-    circles.css({
-      'transition': 'none',
-      'stroke-dasharray': PROGRESS_CIRCUMFERENCE,
-      'stroke-dashoffset': PROGRESS_CIRCUMFERENCE
+  const outlines = $('.bb-slider-actions .bb-circle-outline');
+  const circleWrapper = outlines.eq(index);
+  const circle = circleWrapper.find('.progress-ring__circle');
+
+  // Reset all rings
+  $('.progress-ring__circle').css({
+    transition: 'none',
+    strokeDasharray: PROGRESS_CIRCUMFERENCE,
+    strokeDashoffset: PROGRESS_CIRCUMFERENCE
+  });
+
+  if (circle.length) {
+    // Force reflow to apply initial state before animation
+    circle[0].getBoundingClientRect();
+    circle.css({
+      transition: `stroke-dashoffset ${DURATION / 1000}s linear`,
+      strokeDashoffset: 0
     });
-    const circle = circles.eq(index);
-    if (circle.length) {
-      circle[0].getBoundingClientRect();
-      circle.css({
-        'transition': `stroke-dashoffset ${DURATION / 1000}s linear`,
-        'stroke-dashoffset': 0
-      });
-    }
   }
+}
+
 
   function startAuto() {
     if (autoInterval) return;
@@ -82,7 +96,7 @@ jQuery(function ($) {
         let next = (previousIndex + 1) % actions.length;
         $(actions[next]).trigger('click');
       }
-    }, DURATION);
+    }, INTERVAL_DELAY);
   }
 
   function stopAuto() {
